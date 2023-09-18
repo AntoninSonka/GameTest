@@ -39,42 +39,42 @@ void drawGrid(Tile (&arr)[rows][cols], int numX, int numY, sf::RenderWindow& win
 template <size_t rows, size_t cols>
 void overworldControlls(Tile (&grid)[rows][cols], int numX, int numY, sf::RenderWindow& window, bool& isThere, sf::Vector2i& currentTile, sf::Vector2i& lastTile, sf::Vector2i& playerPos, bool& sprint, sf::View& view){
     sf::Event event;
+    if(isThere){
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !grid[currentTile.x - 14][currentTile.y - 11].isWall){
+            currentTile.y--;
+            playerPos.y--;
+            isThere = 0;
+
+        }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !grid[currentTile.x - 14][currentTile.y - 9].isWall){
+            currentTile.y++;
+            playerPos.y++;
+            isThere = 0;
+
+        }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !grid[currentTile.x - 15][currentTile.y - 10].isWall){
+            currentTile.x--;
+            playerPos.x--;
+            isThere = 0;
+
+        }
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !grid[currentTile.x - 13][currentTile.y - 10].isWall){
+            currentTile.x++;
+            playerPos.x++;
+            isThere = 0;
+
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)){
+            sprint = 1;
+        }
+        else{
+            sprint = 0;
+        }
+    }
     while (window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
             window.close();
-        if(isThere){
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !grid[currentTile.x - 14][currentTile.y - 11].isWall){
-                currentTile.y--;
-                playerPos.y--;
-                isThere = 0;
-
-            }
-            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !grid[currentTile.x - 14][currentTile.y - 9].isWall){
-                currentTile.y++;
-                playerPos.y++;
-                isThere = 0;
-
-            }
-            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !grid[currentTile.x - 15][currentTile.y - 10].isWall){
-                currentTile.x--;
-                playerPos.x--;
-                isThere = 0;
-
-            }
-            else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !grid[currentTile.x - 13][currentTile.y - 10].isWall){
-                currentTile.x++;
-                playerPos.x++;
-                isThere = 0;
-
-            }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)){
-                sprint = 1;
-            }
-            else{
-                sprint = 0;
-            }
-        }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
             std::cout << "x: " << currentTile.x - 14 << " y: " << currentTile.y - 10 << "\n";
         }
