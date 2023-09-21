@@ -5,6 +5,7 @@
 #include "tile.h"
 #include "overworld.h"
 #include "player.h"
+#include "entity.h"
 
 int main()
 {
@@ -15,11 +16,65 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(1024, 1024.f / 1.5f), "Game Test");
 
-    sf::Texture Grass, Barrier, pTexture;
+    sf::Texture Grass, Barrier, pTexture, eTexture;
 
     Grass.loadFromFile("../textures/Grass.png");
     Barrier.loadFromFile("../textures/Barrier.png");
     pTexture.loadFromFile("../textures/Player.png");
+    eTexture.loadFromFile("../textures/Entity.png");
+    
+    std::string sEGrid[50] = {
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                       111111                     ",
+        "                       1    1                     ",
+        "                       1 1111                     ",
+        "                       1 1                        ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  "
+    }
 
     std::string sGrid[50] = {
         "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -75,6 +130,7 @@ int main()
     };
 
     Tile grid[50][50];
+    Entity eGrid[50][50];
 
     setMap(grid, 50, 50, sGrid, &Grass, &Barrier);
 
