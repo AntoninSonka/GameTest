@@ -4,6 +4,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "tile.h"
+#include "entity.h"
 
 template <size_t rows, size_t cols>
 void setMap(Tile (&arr)[rows][cols], int numX, int numY, std::string sMap[], sf::Texture* grass, sf::Texture* barrier) {
@@ -25,12 +26,28 @@ void setMap(Tile (&arr)[rows][cols], int numX, int numY, std::string sMap[], sf:
 }
 
 template <size_t rows, size_t cols>
-void drawGrid(Tile (&arr)[rows][cols], int numX, int numY, sf::RenderWindow& window, sf::Vector2i playerPos){
+void setEMap(Entity (&arr)[rows][cols], Tile (&tArr)[rows][cols], int numX, int numY, std::string eMap[], sf::Texture* eTexture) {
+    for(int i = 0; i < numX; i++){
+        for(int j = 0; j < numY; j++){
+            arr[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(numX, numY));
+            if(eMap[j][i] == '1'){
+                arr[i][j].exists = true;
+                arr[i][j].setWallUnder(tArr[i][j]);
+                arr[i][j].setTexture(eTexture);
+            }
+        }
+    }
+}
+
+template <size_t rows, size_t cols>
+void drawGrid(Tile (&arr)[rows][cols], Entity (&eArr)[rows][cols], int numX, int numY, sf::RenderWindow& window, sf::Vector2i playerPos){
 
     for(int i = (playerPos.x - 8); i < (playerPos.x + 9); i++){
         for(int j = (playerPos.y - 6); j < (playerPos.y + 7); j++){
             if((i >= 0 && i < numX) && (j >= 0 && j < numY)){
                 window.draw(arr[i][j].rect);
+                if(eArr[i][j].exists)
+                    window.draw(eArr[i][j].rect);
             }
         }
     }

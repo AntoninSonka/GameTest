@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include "Tile.h"
+#include "tile.h"
 
 class Entity{
 
@@ -9,6 +9,8 @@ public:
 
     sf::RectangleShape rect;
     sf::Vector2i coords;
+
+    bool exists = false;
 
     void setTexture(sf::Texture* texture);
 

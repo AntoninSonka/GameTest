@@ -74,7 +74,7 @@ int main()
         "                                                  ",
         "                                                  ",
         "                                                  "
-    }
+    };
 
     std::string sGrid[50] = {
         "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -133,6 +133,7 @@ int main()
     Entity eGrid[50][50];
 
     setMap(grid, 50, 50, sGrid, &Grass, &Barrier);
+    setEMap(eGrid, grid, 50, 50, sEGrid, &eTexture);
 
 
     window.setFramerateLimit(60); 
@@ -162,7 +163,7 @@ int main()
 
         window.clear();
         window.setView(view);
-        drawGrid(grid, 50, 50, window, playerPos);
+        drawGrid(grid, eGrid, 50, 50, window, playerPos);
         p.rect.setPosition(view.getCenter());
         window.draw(p.rect);
         window.display();
