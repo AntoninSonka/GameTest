@@ -4,78 +4,81 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "tile.h"
-#include "entity.h"
 
-template <size_t rows, size_t cols>
-void setMap(Tile (&arr)[rows][cols], int numX, int numY, std::string sMap[], sf::Texture* grass, sf::Texture* barrier) {
-    for(int i = 0; i < numX; i++){
-        for(int j = 0; j < numY; j++){
-            arr[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(numX, numY));
+//template <size_t rows, size_t cols>
+void setMap(BackgroundTile (&backgroundGrid)[50][50], sf::Vector2i gridSize, std::string sMap[], sf::Texture* grass, sf::Texture* barrier) {
+    for(int i = 0; i < gridSize.x; i++){
+        for(int j = 0; j < gridSize.y; j++){
+            backgroundGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(gridSize.x, gridSize.y));
             if(sMap[j][i] == 'x'){
-                arr[i][j].isWall = true;
-                arr[i][j].setTexture(barrier);
+                backgroundGrid[i][j].isWall = true;
+                backgroundGrid[i][j].setTexture(barrier);
             }
             else if(sMap[j][i] == 'g'){
-                arr[i][j].setTexture(grass);
+                backgroundGrid[i][j].setTexture(grass);
             }
             else{
-                std::cout << i << ", " << j << "\n";
+                std::cout << i << ", " << j << "background failed\n";
             }
         }
     }
 }
 
-template <size_t rows, size_t cols>
-void setEMap(Entity (&arr)[rows][cols], Tile (&tArr)[rows][cols], int numX, int numY, std::string eMap[], sf::Texture* eTexture) {
-    for(int i = 0; i < numX; i++){
-        for(int j = 0; j < numY; j++){
-            arr[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(numX, numY));
+//template <size_t rows, size_t cols>
+void setEMap(EntityTile (&entityGrid)[50][50], BackgroundTile (&backgroundGrid)[50][50], sf::Vector2i gridSize, std::string eMap[], sf::Texture* eTexture) {
+    for(int i = 0; i < gridSize.x; i++){
+        for(int j = 0; j < gridSize.y; j++){
+            entityGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(gridSize));
             if(eMap[j][i] == '1'){
-                arr[i][j].exists = true;
-                arr[i][j].setWallUnder(tArr[i][j]);
-                arr[i][j].setTexture(eTexture);
+                entityGrid[i][j].exists = true;
+                entityGrid[i][j].setWallUnder(backgroundGrid[i][j]);
+                entityGrid[i][j].setTexture(eTexture);
             }
         }
     }
 }
 
-template <size_t rows, size_t cols>
-void drawGrid(Tile (&arr)[rows][cols], Entity (&eArr)[rows][cols], int numX, int numY, sf::RenderWindow& window, sf::Vector2i playerPos){
-
+//template <size_t rows, size_t cols>
+void drawGrid(BackgroundTile (&backgroundGrid)[50][50], EntityTile (&entityGrid)[50][50], sf::Vector2i gridSize, sf::RenderWindow& window, sf::Vector2i playerPos){
     for(int i = (playerPos.x - 8); i < (playerPos.x + 9); i++){
         for(int j = (playerPos.y - 6); j < (playerPos.y + 7); j++){
-            if((i >= 0 && i < numX) && (j >= 0 && j < numY)){
-                window.draw(arr[i][j].rect);
-                if(eArr[i][j].exists)
-                    window.draw(eArr[i][j].rect);
+
+            if((i >= 0 && i < gridSize.x) && (j >= 0 && j < gridSize.y)){
+
+                window.draw(backgroundGrid[i][j].rect); //pozadí
+
+                if(entityGrid[i][j].exists){
+                    window.draw(entityGrid[i][j].rect); //entita
+                }
+
             }
         }
     }
 }
 
-template <size_t rows, size_t cols>
-void overworldControlls(Tile (&grid)[rows][cols], int numX, int numY, sf::RenderWindow& window, bool& isThere, sf::Vector2i& currentTile, sf::Vector2i& lastTile, sf::Vector2i& playerPos, bool& sprint, sf::View& view){
+//template <size_t rows, size_t cols>
+void overworldControlls(BackgroundTile (&backgroundGrid)[50][50], sf::Vector2i gridSize, sf::RenderWindow& window, bool& isThere, sf::Vector2i& currentTile, sf::Vector2i& lastTile, sf::Vector2i& playerPos, bool& sprint, sf::View& view){
     sf::Event event;
     if(isThere){
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !grid[currentTile.x - 14][currentTile.y - 11].isWall){
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !backgroundGrid[currentTile.x - 14][currentTile.y - 11].isWall){
             currentTile.y--;
             playerPos.y--;
             isThere = 0;
 
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !grid[currentTile.x - 14][currentTile.y - 9].isWall){
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !backgroundGrid[currentTile.x - 14][currentTile.y - 9].isWall){
             currentTile.y++;
             playerPos.y++;
             isThere = 0;
 
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !grid[currentTile.x - 15][currentTile.y - 10].isWall){
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !backgroundGrid[currentTile.x - 15][currentTile.y - 10].isWall){
             currentTile.x--;
             playerPos.x--;
             isThere = 0;
 
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !grid[currentTile.x - 13][currentTile.y - 10].isWall){
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !backgroundGrid[currentTile.x - 13][currentTile.y - 10].isWall){
             currentTile.x++;
             playerPos.x++;
             isThere = 0;

@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "tile.h"
 
-class Entity{
+class Entity {
 
 public:
 
@@ -13,11 +13,9 @@ public:
     bool exists = false;
 
     void setTexture(sf::Texture* texture);
-
     void setProps(sf::Vector2f size, sf::Vector2f position, sf::Vector2i coords);
 
     void setWallUnder(Tile& tile);
-
     void unsetWallUnder(Tile& tile);
 
 };

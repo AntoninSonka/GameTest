@@ -1,11 +1,10 @@
-#include <SFML/Graphics.hpp>
 #include <chrono>
 #include <thread>
 #include <iostream>
-#include "tile.h"
+#include <SFML/Graphics.hpp>
 #include "overworld.h"
+#include "tile.h"
 #include "player.h"
-#include "entity.h"
 
 int main()
 {
@@ -129,11 +128,13 @@ int main()
         "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     };
 
-    Tile grid[50][50];
-    Entity eGrid[50][50];
+    BackgroundTile grid[50][50];
+    EntityTile eGrid[50][50];
 
-    setMap(grid, 50, 50, sGrid, &Grass, &Barrier);
-    setEMap(eGrid, grid, 50, 50, sEGrid, &eTexture);
+    sf::Vector2i gridSize = sf::Vector2i(50, 50);
+
+    setMap(grid, gridSize, sGrid, &Grass, &Barrier);
+    setEMap(eGrid, grid, gridSize, sEGrid, &eTexture);
 
 
     window.setFramerateLimit(60); 
@@ -159,11 +160,11 @@ int main()
 
         //!-------------------------------------------------------
 
-        overworldControlls(grid, 50, 50, window, isThere, currentTile, lastTile, playerPos, sprint, view);
+        overworldControlls(grid, gridSize, window, isThere, currentTile, lastTile, playerPos, sprint, view);
 
         window.clear();
         window.setView(view);
-        drawGrid(grid, eGrid, 50, 50, window, playerPos);
+        drawGrid(grid, eGrid, gridSize, window, playerPos);
         p.rect.setPosition(view.getCenter());
         window.draw(p.rect);
         window.display();
