@@ -5,8 +5,8 @@
 #include <SFML/Graphics.hpp>
 #include "tile.h"
 
-//template <size_t rows, size_t cols>
-void setMap(BackgroundTile (&backgroundGrid)[50][50], sf::Vector2i gridSize, std::string sMap[], sf::Texture* grass, sf::Texture* barrier) {
+template <size_t rows, size_t cols>
+void setMap(BackgroundTile (&backgroundGrid)[rows][cols], sf::Vector2i gridSize, std::string sMap[], sf::Texture* grass, sf::Texture* barrier) {
     for(int i = 0; i < gridSize.x; i++){
         for(int j = 0; j < gridSize.y; j++){
             backgroundGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(gridSize.x, gridSize.y));
@@ -24,8 +24,8 @@ void setMap(BackgroundTile (&backgroundGrid)[50][50], sf::Vector2i gridSize, std
     }
 }
 
-//template <size_t rows, size_t cols>
-void setEMap(EntityTile (&entityGrid)[50][50], BackgroundTile (&backgroundGrid)[50][50], sf::Vector2i gridSize, std::string eMap[], sf::Texture* eTexture) {
+template <size_t rows, size_t cols>
+void setEMap(EntityTile (&entityGrid)[rows][cols], BackgroundTile (&backgroundGrid)[rows][cols], sf::Vector2i gridSize, std::string eMap[], sf::Texture* eTexture) {
     for(int i = 0; i < gridSize.x; i++){
         for(int j = 0; j < gridSize.y; j++){
             entityGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(gridSize));
@@ -38,8 +38,8 @@ void setEMap(EntityTile (&entityGrid)[50][50], BackgroundTile (&backgroundGrid)[
     }
 }
 
-//template <size_t rows, size_t cols>
-void drawGrid(BackgroundTile (&backgroundGrid)[50][50], EntityTile (&entityGrid)[50][50], sf::Vector2i gridSize, sf::RenderWindow& window, sf::Vector2i playerPos){
+template <size_t rows, size_t cols>
+void drawGrid(BackgroundTile (&backgroundGrid)[rows][cols], EntityTile (&entityGrid)[rows][cols], sf::Vector2i gridSize, sf::RenderWindow& window, sf::Vector2i playerPos){
     for(int i = (playerPos.x - 8); i < (playerPos.x + 9); i++){
         for(int j = (playerPos.y - 6); j < (playerPos.y + 7); j++){
 
@@ -56,8 +56,8 @@ void drawGrid(BackgroundTile (&backgroundGrid)[50][50], EntityTile (&entityGrid)
     }
 }
 
-//template <size_t rows, size_t cols>
-void overworldControlls(BackgroundTile (&backgroundGrid)[50][50], sf::Vector2i gridSize, sf::RenderWindow& window, bool& isThere, sf::Vector2i& currentTile, sf::Vector2i& lastTile, sf::Vector2i& playerPos, bool& sprint, sf::View& view){
+template <size_t rows, size_t cols>
+void overworldControlls(BackgroundTile (&backgroundGrid)[rows][cols], sf::Vector2i gridSize, sf::RenderWindow& window, bool& isThere, sf::Vector2i& currentTile, sf::Vector2i& lastTile, sf::Vector2i& playerPos, bool& sprint, sf::View& view){
     sf::Event event;
     if(isThere){
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !backgroundGrid[currentTile.x - 14][currentTile.y - 11].isWall){

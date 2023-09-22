@@ -21,7 +21,7 @@ int main()
     Barrier.loadFromFile("../textures/Barrier.png");
     pTexture.loadFromFile("../textures/Player.png");
     eTexture.loadFromFile("../textures/Entity.png");
-    
+
     std::string sEGrid[50] = {
         "                                                  ",
         "                                                  ",
