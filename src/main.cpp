@@ -133,8 +133,8 @@ int main()
 
     sf::Vector2i gridSize = sf::Vector2i(50, 50);
 
-    setMap(grid, gridSize, sGrid, &Grass, &Barrier);
-    setEMap(eGrid, grid, gridSize, sEGrid, &eTexture);
+    setBackgroundMap(grid, gridSize, sGrid, &Grass, &Barrier);
+    setEntityMap(eGrid, grid, gridSize, sEGrid, &eTexture);
 
 
     window.setFramerateLimit(60); 

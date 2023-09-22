@@ -6,7 +6,7 @@
 #include "tile.h"
 
 template <size_t rows, size_t cols>
-void setMap(BackgroundTile (&backgroundGrid)[rows][cols], sf::Vector2i gridSize, std::string sMap[], sf::Texture* grass, sf::Texture* barrier) {
+void setBackgroundMap(BackgroundTile (&backgroundGrid)[rows][cols], sf::Vector2i gridSize, std::string sMap[], sf::Texture* grass, sf::Texture* barrier) {
     for(int i = 0; i < gridSize.x; i++){
         for(int j = 0; j < gridSize.y; j++){
             backgroundGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(gridSize.x, gridSize.y));
@@ -25,7 +25,7 @@ void setMap(BackgroundTile (&backgroundGrid)[rows][cols], sf::Vector2i gridSize,
 }
 
 template <size_t rows, size_t cols>
-void setEMap(EntityTile (&entityGrid)[rows][cols], BackgroundTile (&backgroundGrid)[rows][cols], sf::Vector2i gridSize, std::string eMap[], sf::Texture* eTexture) {
+void setEntityMap(EntityTile (&entityGrid)[rows][cols], BackgroundTile (&backgroundGrid)[rows][cols], sf::Vector2i gridSize, std::string eMap[], sf::Texture* eTexture) {
     for(int i = 0; i < gridSize.x; i++){
         for(int j = 0; j < gridSize.y; j++){
             entityGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(gridSize));
