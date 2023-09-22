@@ -151,7 +151,7 @@ int main()
     lastTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
     currentTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
 
-    Player p(&pTexture);
+    setPlayerProps(&pTexture);
  
 
     while (window.isOpen())
@@ -165,8 +165,8 @@ int main()
         window.clear();
         window.setView(view);
         drawGrid(grid, eGrid, gridSize, window, playerPos);
-        p.rect.setPosition(view.getCenter());
-        window.draw(p.rect);
+        player.setPosition(view.getCenter());
+        window.draw(player);
         window.display();
 
         //!-------------------------------------------------------
