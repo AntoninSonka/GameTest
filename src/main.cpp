@@ -15,12 +15,66 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(1024, 1024.f / 1.5f), "Game Test");
 
-    sf::Texture Grass, Barrier, pTexture, eTexture;
+    sf::Texture Grass, Barrier, pTexture, eTexture, fTexture;
 
     Grass.loadFromFile("../textures/Grass.png");
     Barrier.loadFromFile("../textures/Barrier.png");
     pTexture.loadFromFile("../textures/Player.png");
     eTexture.loadFromFile("../textures/Entity.png");
+    fTexture.loadFromFile("../textures/Shadow.png");
+
+    std::string sFGrid[50] = {
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                   sss                            ",
+        "                   sss                            ",
+        "                   ssssss                         ",
+        "                     s ss                         ",
+        "                     ssss                         ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  ",
+        "                                                  "
+    };
 
     std::string sEGrid[50] = {
         "                                                  ",
@@ -130,11 +184,13 @@ int main()
 
     BackgroundTile grid[50][50];
     EntityTile eGrid[50][50];
+    EffectTile fGrid[50][50];
 
     sf::Vector2i gridSize = sf::Vector2i(50, 50);
 
     setBackgroundMap(grid, gridSize, sGrid, &Grass, &Barrier);
     setEntityMap(eGrid, grid, gridSize, sEGrid, &eTexture);
+    setEffectMap(fGrid, gridSize, sFGrid, &fTexture);
 
 
     window.setFramerateLimit(60); 
@@ -164,9 +220,7 @@ int main()
 
         window.clear();
         window.setView(view);
-        drawGrid(grid, eGrid, gridSize, window, playerPos);
-        player.setPosition(view.getCenter());
-        window.draw(player);
+        drawGrid(grid, eGrid, fGrid, gridSize, window, playerPos, sf::Vector2i(lastTile.x - 14, lastTile.y - 10), view);
         window.display();
 
         //!-------------------------------------------------------

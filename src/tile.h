@@ -62,3 +62,16 @@ void::EntityTile::setWallUnder(BackgroundTile& backgroundTile){
 void::EntityTile::unsetWallUnder(BackgroundTile& backgroundTile){
     backgroundTile.isWall = false;
 }
+
+
+
+//!------------------------------------------
+//? Effect classa
+
+class EffectTile : public Tile {
+
+public:
+
+    bool exists = false;
+
+};
