@@ -9,7 +9,7 @@
 int main()
 {
 
-    const int IPS = 60;
+    const int IPS = 60; //fps defakto
 
     std::chrono::milliseconds iDuration(1000 /  IPS);
 
