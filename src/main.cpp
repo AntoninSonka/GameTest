@@ -15,13 +15,17 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(1024, 1024.f / 1.5f), "Game Test");
 
-    sf::Texture Grass, Barrier, pTexture, eTexture, fTexture;
+    sf::Texture Grass, Barrier, pTexture, eTexture, fTexture, upTexture, downTexture, leftTexture, rightTexture;
 
     Grass.loadFromFile("../textures/Grass.png");
     Barrier.loadFromFile("../textures/Barrier.png");
     pTexture.loadFromFile("../textures/Player.png");
     eTexture.loadFromFile("../textures/Entity.png");
     fTexture.loadFromFile("../textures/Shadow.png");
+    upTexture.loadFromFile("../textures/PlayerUp.png");
+    downTexture.loadFromFile("../textures/PlayerDown.png");
+    leftTexture.loadFromFile("../textures/PlayerLeft.png");
+    rightTexture.loadFromFile("../textures/PlayerRight.png");
 
     std::string sFGrid[50] = {
         "                                                  ",
@@ -207,7 +211,7 @@ int main()
     lastTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
     currentTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
 
-    setPlayerProps(&pTexture);
+    setPlayerProps(&pTexture, &upTexture, &downTexture, &leftTexture, &rightTexture);
  
 
     while (window.isOpen())
