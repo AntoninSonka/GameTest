@@ -28,33 +28,38 @@ void overworldControlls(BackgroundTile (&backgroundGrid)[rows][cols], sf::Vector
     int direction = 0;
 
     if(isThere){
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && !backgroundGrid[currentTile.x - 14][currentTile.y - 11].isWall){
-            currentTile.y--;
-            playerPos.y--;
-            isThere = 0;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
             direction = 1;
-
+            if (!backgroundGrid[currentTile.x - 14][currentTile.y - 11].isWall){
+                currentTile.y--;
+                playerPos.y--;
+                isThere = 0;
+            }
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && !backgroundGrid[currentTile.x - 14][currentTile.y - 9].isWall){
-            currentTile.y++;
-            playerPos.y++;
-            isThere = 0;
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
             direction = 2;
-
+            if(!backgroundGrid[currentTile.x - 14][currentTile.y - 9].isWall){
+                currentTile.y++;
+                playerPos.y++;
+                isThere = 0;
+            }
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && !backgroundGrid[currentTile.x - 15][currentTile.y - 10].isWall){
-            currentTile.x--;
-            playerPos.x--;
-            isThere = 0;
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
             direction = 3;
+            if(!backgroundGrid[currentTile.x - 15][currentTile.y - 10].isWall){
+                currentTile.x--;
+                playerPos.x--;
+                isThere = 0;
+            }
 
         }
-        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !backgroundGrid[currentTile.x - 13][currentTile.y - 10].isWall){
-            currentTile.x++;
-            playerPos.x++;
-            isThere = 0;
+        else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
             direction = 4;
-
+            if(!backgroundGrid[currentTile.x - 13][currentTile.y - 10].isWall){
+                currentTile.x++;
+                playerPos.x++;
+                isThere = 0;
+            }
         }
         else {
             direction = 0;

@@ -3,6 +3,8 @@
 #include <string>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <vector>
+#include <fstream>
 #include "tile.h"
 #include "player.h"
 
@@ -31,7 +33,7 @@ template <size_t rows, size_t cols>
 void setEntityMap(EntityTile (&entityGrid)[rows][cols], BackgroundTile (&backgroundGrid)[rows][cols], sf::Vector2i gridSize, std::string eMap[], sf::Texture* eTexture) {
     for(int i = 0; i < gridSize.x; i++){
         for(int j = 0; j < gridSize.y; j++){
-            if(eMap[j][i] == '1'){
+            if(eMap[j][i] == 'e'){
                 entityGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(gridSize));
                 entityGrid[i][j].exists = true;
                 entityGrid[i][j].setWallUnder(backgroundGrid[i][j]);
@@ -80,4 +82,48 @@ void drawGrid(BackgroundTile (&backgroundGrid)[rows][cols], EntityTile (&entityG
     if(lastTile != playerPos){
         window.draw(effectGrid[lastTile.x][lastTile.y].rect);
     }
+}
+
+int readMapFromText(std::string backgroundMap[], std::string entityMap[], std::string effectMap[], std::string path){
+
+    std::ifstream inputStream(path);
+
+    if(!inputStream){
+        std::cerr << "unable to open " << path << "\n";
+        inputStream.close();
+        return 1;
+    }
+
+    std::vector<std::string> text;
+
+    std::string line;
+
+    while(std::getline(inputStream, line)){
+        text.push_back(line);
+    }
+
+    int xSize = std::stoi(text[0]);
+    int ySize = std::stoi(text[1]);
+    
+    backgroundMap[ySize];
+    int i = 3;
+    while(text[i][0] != '_'){
+        backgroundMap[i - 3] = text[i];
+        i++;
+    }
+    i++;
+    while(text[i][0] != '_'){
+        entityMap[i - 4 - ySize] = text[i];
+        //std::cout << text[i] << "\n";
+        i++;
+    }
+    i++;
+    while(text[i][0] != '_'){
+        effectMap[i - 5 - ySize * 2] = text[i];
+        i++;
+    }
+
+
+    inputStream.close();
+    return 0;
 }
