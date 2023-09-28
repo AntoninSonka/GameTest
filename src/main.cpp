@@ -50,7 +50,7 @@ int main()
 
     window.setFramerateLimit(60); 
 
-    sf::Vector2i playerPos = sf::Vector2i(30, 30);
+    sf::Vector2i playerPos = sf::Vector2i(1, 1);
 
     sf::View view(sf::Vector2f(playerPos.x * 16 + 8, playerPos.y * 16 + 8), sf::Vector2f(240.f, 240.f / 1.5f));
 

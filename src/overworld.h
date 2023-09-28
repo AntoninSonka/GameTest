@@ -125,5 +125,6 @@ int readMapFromText(std::string backgroundMap[], std::string entityMap[], std::s
 
 
     inputStream.close();
+    std::cout << "neco";
     return 0;
 }
