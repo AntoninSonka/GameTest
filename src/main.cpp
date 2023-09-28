@@ -29,15 +29,18 @@ int main()
 
     sf::Vector2i gridSize = sf::Vector2i(50, 50);
 
-    std::string sFGrid[gridSize.y];
-    std::string sEGrid[gridSize.y];
-    std::string sGrid[gridSize.y];
+    const int xSize = 50;
+    const int ySize = 50;
+
+    std::string sFGrid[ySize];
+    std::string sEGrid[ySize];
+    std::string sGrid[ySize];
 
     readMapFromText(sGrid, sEGrid, sFGrid, "../maps/map1.txt");
 
-    BackgroundTile grid[gridSize.x][gridSize.y];
-    EntityTile eGrid[gridSize.x][gridSize.y];
-    EffectTile fGrid[gridSize.x][gridSize.y];
+    BackgroundTile grid[xSize][ySize];
+    EntityTile eGrid[xSize][ySize];
+    EffectTile fGrid[xSize][ySize];
 
 
     setBackgroundMap(grid, gridSize, sGrid, &Grass, &Barrier);
