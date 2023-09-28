@@ -2,6 +2,7 @@
 #include <thread>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "overworld.h"
 #include "tile.h"
 #include "player.h"
@@ -27,21 +28,52 @@ int main()
     leftTexture.loadFromFile("../textures/PlayerLeft.png");
     rightTexture.loadFromFile("../textures/PlayerRight.png");
 
-    sf::Vector2i gridSize = sf::Vector2i(50, 50);
+    sf::Vector2i gridSize = sf::Vector2i(10, 9);
 
-    const int xSize = 50;
-    const int ySize = 50;
+    /*const int xSize = 10;
+    const int ySize = 9;
 
-    std::string sFGrid[ySize];
-    std::string sEGrid[ySize];
-    std::string sGrid[ySize];
-
-    readMapFromText(sGrid, sEGrid, sFGrid, "../maps/map1.txt");
-
+    std::string sFGrid[gridSize.y];
+    std::string sEGrid[gridSize.y];
+    std::string sGrid[gridSize.y];
+    
     BackgroundTile grid[xSize][ySize];
     EntityTile eGrid[xSize][ySize];
-    EffectTile fGrid[xSize][ySize];
+    EffectTile fGrid[xSize][ySize];*/
 
+    std::vector<std::string> sGrid;
+    std::vector<std::string> sEGrid;
+    std::vector<std::string> sFGrid;
+
+    for(int i = 0; i < gridSize.y; i++){
+        sGrid.push_back("");
+        sEGrid.push_back("");
+        sFGrid.push_back("");
+    }
+
+    std::vector<std::vector<BackgroundTile>> grid;
+    std::vector<std::vector<EntityTile>> eGrid;
+    std::vector<std::vector<EffectTile>> fGrid;
+
+    for(int i = 0; i < gridSize.x; i++){
+        std::vector<BackgroundTile> underGrid;
+        std::vector<EntityTile> underEGrid;
+        std::vector<EffectTile> underFGrid;
+        for(int j = 0; j < gridSize.y; j++){
+            BackgroundTile bObj;
+            EntityTile eObj;
+            EffectTile fObj;
+
+            underGrid.push_back(bObj);
+            underEGrid.push_back(eObj);
+            underFGrid.push_back(fObj);
+        }
+        grid.push_back(underGrid);
+        eGrid.push_back(underEGrid);
+        fGrid.push_back(underFGrid);
+    }
+
+    readMapFromText(sGrid, sEGrid, sFGrid, "../maps/map2.txt");
 
     setBackgroundMap(grid, gridSize, sGrid, &Grass, &Barrier);
     setEntityMap(eGrid, grid, gridSize, sEGrid, &eTexture);
