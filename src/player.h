@@ -21,7 +21,9 @@ void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* dow
 }
 
 //template <size_t rows, size_t cols>
-void overworldControlls(/*BackgroundTile (&backgroundGrid)[rows][cols]*/ std::vector<std::vector<BackgroundTile>>& backgroundGrid, sf::Vector2i gridSize, sf::RenderWindow& window, bool& isThere, sf::Vector2i& currentTile, sf::Vector2i& lastTile, sf::Vector2i& playerPos, bool& sprint, sf::View& view){
+void overworldControlls(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
+                        std::vector<std::vector<BackgroundTile>>& backgroundGrid, sf::Vector2i gridSize, sf::RenderWindow& window,
+                        bool& isThere, sf::Vector2i& currentTile, sf::Vector2i& lastTile, sf::Vector2i& playerPos, bool& sprint, sf::View& view){
 
     sf::Event event;
 

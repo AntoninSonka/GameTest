@@ -10,7 +10,10 @@
 
 //setování pozadí
 //template <size_t rows, size_t cols>
-void setBackgroundMap(/*BackgroundTile (&backgroundGrid)[rows][cols]*/ std::vector<std::vector<BackgroundTile>>& backgroundGrid, sf::Vector2i gridSize, /*std::string sMap[]*/ std::vector<std::string>& sMap, sf::Texture* grass, sf::Texture* barrier) {
+void setBackgroundMap(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
+                      std::vector<std::vector<BackgroundTile>>& backgroundGrid, sf::Vector2i gridSize, /*std::string sMap[]*/
+                      std::vector<std::string>& sMap, sf::Texture* grass, sf::Texture* barrier) {
+
     for(int i = 0; i < gridSize.x; i++){
         for(int j = 0; j < gridSize.y; j++){
             backgroundGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(gridSize.x, gridSize.y));
@@ -30,7 +33,11 @@ void setBackgroundMap(/*BackgroundTile (&backgroundGrid)[rows][cols]*/ std::vect
 
 //setování entit
 //template <size_t rows, size_t cols>
-void setEntityMap(/*EntityTile (&entityGrid)[rows][cols]*/std::vector<std::vector<EntityTile>>& entityGrid, /*BackgroundTile (&backgroundGrid)[rows][cols]*/ std::vector<std::vector<BackgroundTile>>& backgroundGrid, sf::Vector2i gridSize, /*std::string eMap[]*/ std::vector<std::string>& eMap, sf::Texture* eTexture) {
+void setEntityMap(/*EntityTile (&entityGrid)[rows][cols]*/
+                  std::vector<std::vector<EntityTile>>& entityGrid, /*BackgroundTile (&backgroundGrid)[rows][cols]*/
+                  std::vector<std::vector<BackgroundTile>>& backgroundGrid, sf::Vector2i gridSize, /*std::string eMap[]*/
+                  std::vector<std::string>& eMap, sf::Texture* eTexture) {
+
     for(int i = 0; i < gridSize.x; i++){
         for(int j = 0; j < gridSize.y; j++){
             if(eMap[j][i] == 'e'){
@@ -45,7 +52,10 @@ void setEntityMap(/*EntityTile (&entityGrid)[rows][cols]*/std::vector<std::vecto
 
 //setování efektů
 //template <size_t rows, size_t cols>
-void setEffectMap(/*EffectTile (&effectGrid)[rows][cols]*/std::vector<std::vector<EffectTile>>& effectGrid, sf::Vector2i gridSize, /*std::string fMap[]*/ std::vector<std::string>& fMap, sf::Texture* fTexture) {
+void setEffectMap(/*EffectTile (&effectGrid)[rows][cols]*/
+                  std::vector<std::vector<EffectTile>>& effectGrid, sf::Vector2i gridSize, /*std::string fMap[]*/
+                  std::vector<std::string>& fMap, sf::Texture* fTexture) {
+
     for(int i = 0; i < gridSize.x; i++){
         for(int j = 0; j < gridSize.y; j++){
             if(fMap[j][i] == 's'){
@@ -58,7 +68,12 @@ void setEffectMap(/*EffectTile (&effectGrid)[rows][cols]*/std::vector<std::vecto
 }
 
 //template <size_t rows, size_t cols>
-void drawGrid(/*BackgroundTile (&backgroundGrid)[rows][cols]*/std::vector<std::vector<BackgroundTile>>& backgroundGrid, /*EntityTile (&entityGrid)[rows][cols]*/std::vector<std::vector<EntityTile>>& entityGrid, /*EffectTile (&effectGrid)[rows][cols]*/std::vector<std::vector<EffectTile>>& effectGrid, sf::Vector2i gridSize, sf::RenderWindow& window, sf::Vector2i playerPos, sf::Vector2i lastTile, sf::View& view){
+void drawGrid(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
+              std::vector<std::vector<BackgroundTile>>& backgroundGrid, /*EntityTile (&entityGrid)[rows][cols]*/ 
+              std::vector<std::vector<EntityTile>>& entityGrid, /*EffectTile (&effectGrid)[rows][cols]*/ 
+              std::vector<std::vector<EffectTile>>& effectGrid, sf::Vector2i gridSize, sf::RenderWindow& window, 
+              sf::Vector2i playerPos, sf::Vector2i lastTile, sf::View& view){
+
     for(int i = (playerPos.x - 8); i < (playerPos.x + 9); i++){
         for(int j = (playerPos.y - 6); j < (playerPos.y + 7); j++){
 
@@ -84,7 +99,10 @@ void drawGrid(/*BackgroundTile (&backgroundGrid)[rows][cols]*/std::vector<std::v
     }
 }
 
-int readMapFromText(/*std::string backgroundMap[]*/ std::vector<std::string>& backgroundMap, /*std::string entityMap[]*/ std::vector<std::string>& entityMap, /*std::string effectMap[]*/ std::vector<std::string>& effectMap, std::string path){
+int readMapFromText(/*std::string backgroundMap[]*/
+                    std::vector<std::string>& backgroundMap, /*std::string entityMap[]*/
+                    std::vector<std::string>& entityMap, /*std::string effectMap[]*/
+                    std::vector<std::string>& effectMap, std::string path){
 
     std::ifstream inputStream(path);
 

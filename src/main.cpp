@@ -28,7 +28,7 @@ int main()
     leftTexture.loadFromFile("../textures/PlayerLeft.png");
     rightTexture.loadFromFile("../textures/PlayerRight.png");
 
-    sf::Vector2i gridSize = sf::Vector2i(10, 9);
+    sf::Vector2i gridSize = sf::Vector2i(50, 50);
 
     /*const int xSize = 10;
     const int ySize = 9;
@@ -73,7 +73,7 @@ int main()
         fGrid.push_back(underFGrid);
     }
 
-    readMapFromText(sGrid, sEGrid, sFGrid, "../maps/map2.txt");
+    readMapFromText(sGrid, sEGrid, sFGrid, "../maps/map1.txt");
 
     setBackgroundMap(grid, gridSize, sGrid, &Grass, &Barrier);
     setEntityMap(eGrid, grid, gridSize, sEGrid, &eTexture);
