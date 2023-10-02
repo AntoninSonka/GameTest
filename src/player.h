@@ -22,7 +22,8 @@ void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* dow
 
 //template <size_t rows, size_t cols>
 void overworldControlls(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
-                        std::vector<std::vector<BackgroundTile>>& backgroundGrid, sf::Vector2i gridSize, sf::RenderWindow& window,
+                        std::vector<std::vector<BackgroundTile>>& backgroundGrid, std::vector<std::vector<EntityTile>>& entityGrid,
+                        sf::Vector2i gridSize, sf::RenderWindow& window,
                         bool& isThere, sf::Vector2i& currentTile, sf::Vector2i& lastTile, sf::Vector2i& playerPos, bool& sprint, sf::View& view){
 
     sf::Event event;
@@ -67,6 +68,17 @@ void overworldControlls(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
             direction = 0;
         }
 
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
+            if(entityGrid[2][2].isTriggered(playerPos, (player.getTexture() == upTexture) ? 1 : ((player.getTexture() == downTexture) ? 2 : ((player.getTexture() == leftTexture) ? 3 : ((player.getTexture() == rightTexture) ? 4 : 0))))){
+                std::cout << "neco\n";
+                std::cout << "x: " << currentTile.x - 14 << " y: " << currentTile.y - 10 << "\n";
+            }
+            else{
+                std::cout << "nic\n";
+                std::cout << "x: " << currentTile.x - 14 << " y: " << currentTile.y - 10 << "\n";
+            }
+        }
+
         if(direction == 1 && player.getTexture() != upTexture ){
             player.setTexture(upTexture);
         }
@@ -92,9 +104,6 @@ void overworldControlls(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
 
         if (event.type == sf::Event::Closed)
             window.close();
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
-            std::cout << "x: " << currentTile.x - 14 << " y: " << currentTile.y - 10 << "\n";
-        }
 
     }
 

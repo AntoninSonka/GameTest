@@ -41,7 +41,7 @@ void setEntityMap(/*EntityTile (&entityGrid)[rows][cols]*/
     for(int i = 0; i < gridSize.x; i++){
         for(int j = 0; j < gridSize.y; j++){
             if(eMap[j][i] == 'e'){
-                entityGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(gridSize));
+                entityGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(/*gridSize*/ i, j));
                 entityGrid[i][j].exists = true;
                 entityGrid[i][j].setWallUnder(backgroundGrid[i][j]);
                 entityGrid[i][j].setTexture(eTexture);

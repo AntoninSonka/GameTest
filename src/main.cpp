@@ -103,7 +103,7 @@ int main()
 
         //!-------------------------------------------------------
 
-        overworldControlls(grid, gridSize, window, isThere, currentTile, lastTile, playerPos, sprint, view);
+        overworldControlls(grid, eGrid, gridSize, window, isThere, currentTile, lastTile, playerPos, sprint, view);
 
         window.clear();
         window.setView(view);
