@@ -22,7 +22,7 @@ class BackgroundTile : public Tile { //classa pro backgrount tiles
 public:
 
     bool isPlayerOn = false; //!dosud nepoužitý, má význam později kvůli dveřím atd, možná předělám do entit
-    bool isWall = false;
+    bool isWall = false; //zed
 
 };
 
