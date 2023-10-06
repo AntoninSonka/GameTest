@@ -30,17 +30,6 @@ int main()
 
     sf::Vector2i gridSize = sf::Vector2i(50, 50);
 
-    /*const int xSize = 10;
-    const int ySize = 9;
-
-    std::string sFGrid[gridSize.y];
-    std::string sEGrid[gridSize.y];
-    std::string sGrid[gridSize.y];
-    
-    BackgroundTile grid[xSize][ySize];
-    EntityTile eGrid[xSize][ySize];
-    EffectTile fGrid[xSize][ySize];*/
-
     std::vector<std::string> sGrid;
     std::vector<std::string> sEGrid;
     std::vector<std::string> sFGrid;

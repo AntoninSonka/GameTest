@@ -9,6 +9,8 @@ sf::Texture* downTexture;
 sf::Texture* leftTexture;
 sf::Texture* rightTexture;
 
+int realDirection = 0;
+
 void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* downTextu, sf::Texture* leftTextu, sf::Texture* rightTextu){
     player.setSize(sf::Vector2f(16, 16));
     player.setOrigin(player.getGlobalBounds().width / 2, player.getGlobalBounds().height / 2);
@@ -20,9 +22,7 @@ void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* dow
     rightTexture = rightTextu;
 }
 
-//template <size_t rows, size_t cols>
-void overworldControlls(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
-                        std::vector<std::vector<BackgroundTile>>& backgroundGrid, std::vector<std::vector<EntityTile>>& entityGrid,
+void overworldControlls(std::vector<std::vector<BackgroundTile>>& backgroundGrid, std::vector<std::vector<EntityTile>>& entityGrid,
                         sf::Vector2i gridSize, sf::RenderWindow& window,
                         bool& isThere, sf::Vector2i& currentTile, sf::Vector2i& lastTile, sf::Vector2i& playerPos, bool& sprint, sf::View& view){
 
@@ -33,6 +33,7 @@ void overworldControlls(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
     if(isThere){
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
             direction = 1;
+            realDirection = 1;
             if (!backgroundGrid[currentTile.x - 14][currentTile.y - 11].isWall){
                 currentTile.y--;
                 playerPos.y--;
@@ -41,6 +42,7 @@ void overworldControlls(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
         }
         else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
             direction = 2;
+            realDirection = 2;
             if(!backgroundGrid[currentTile.x - 14][currentTile.y - 9].isWall){
                 currentTile.y++;
                 playerPos.y++;
@@ -49,6 +51,7 @@ void overworldControlls(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
         }
         else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
             direction = 3;
+            realDirection = 3;
             if(!backgroundGrid[currentTile.x - 15][currentTile.y - 10].isWall){
                 currentTile.x--;
                 playerPos.x--;
@@ -58,6 +61,7 @@ void overworldControlls(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
         }
         else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
             direction = 4;
+            realDirection = 4;
             if(!backgroundGrid[currentTile.x - 13][currentTile.y - 10].isWall){
                 currentTile.x++;
                 playerPos.x++;
@@ -69,13 +73,15 @@ void overworldControlls(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
         }
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
-            if(entityGrid[2][2].isTriggered(playerPos, (player.getTexture() == upTexture) ? 1 : ((player.getTexture() == downTexture) ? 2 : ((player.getTexture() == leftTexture) ? 3 : ((player.getTexture() == rightTexture) ? 4 : 0))))){
-                std::cout << "neco\n";
-                std::cout << "x: " << currentTile.x - 14 << " y: " << currentTile.y - 10 << "\n";
-            }
-            else{
-                std::cout << "nic\n";
-                std::cout << "x: " << currentTile.x - 14 << " y: " << currentTile.y - 10 << "\n";
+            if(entityGrid[2][2].isInRange(playerPos)){
+                if(entityGrid[2][2].isTriggered(playerPos, realDirection)){
+                    std::cout << "neco\n";
+                    std::cout << "x: " << currentTile.x - 14 << " y: " << currentTile.y - 10 << "\n";
+                }
+                else{
+                    std::cout << "nic\n";
+                    std::cout << "x: " << currentTile.x - 14 << " y: " << currentTile.y - 10 << "\n";
+                }
             }
         }
 

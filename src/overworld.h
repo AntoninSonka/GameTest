@@ -9,9 +9,7 @@
 #include "player.h"
 
 //setování pozadí
-//template <size_t rows, size_t cols>
-void setBackgroundMap(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
-                      std::vector<std::vector<BackgroundTile>>& backgroundGrid, sf::Vector2i gridSize, /*std::string sMap[]*/
+void setBackgroundMap(std::vector<std::vector<BackgroundTile>>& backgroundGrid, sf::Vector2i gridSize, 
                       std::vector<std::string>& sMap, sf::Texture* grass, sf::Texture* barrier) {
 
     for(int i = 0; i < gridSize.x; i++){
@@ -32,16 +30,15 @@ void setBackgroundMap(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
 }
 
 //setování entit
-//template <size_t rows, size_t cols>
-void setEntityMap(/*EntityTile (&entityGrid)[rows][cols]*/
-                  std::vector<std::vector<EntityTile>>& entityGrid, /*BackgroundTile (&backgroundGrid)[rows][cols]*/
-                  std::vector<std::vector<BackgroundTile>>& backgroundGrid, sf::Vector2i gridSize, /*std::string eMap[]*/
+void setEntityMap(
+                  std::vector<std::vector<EntityTile>>& entityGrid,
+                  std::vector<std::vector<BackgroundTile>>& backgroundGrid, sf::Vector2i gridSize,
                   std::vector<std::string>& eMap, sf::Texture* eTexture) {
 
     for(int i = 0; i < gridSize.x; i++){
         for(int j = 0; j < gridSize.y; j++){
             if(eMap[j][i] == 'e'){
-                entityGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(/*gridSize*/ i, j));
+                entityGrid[i][j].setProps(sf::Vector2f(16, 16), sf::Vector2f(i * 16, j * 16), sf::Vector2i(i, j));
                 entityGrid[i][j].exists = true;
                 entityGrid[i][j].setWallUnder(backgroundGrid[i][j]);
                 entityGrid[i][j].setTexture(eTexture);
@@ -51,9 +48,7 @@ void setEntityMap(/*EntityTile (&entityGrid)[rows][cols]*/
 }
 
 //setování efektů
-//template <size_t rows, size_t cols>
-void setEffectMap(/*EffectTile (&effectGrid)[rows][cols]*/
-                  std::vector<std::vector<EffectTile>>& effectGrid, sf::Vector2i gridSize, /*std::string fMap[]*/
+void setEffectMap(std::vector<std::vector<EffectTile>>& effectGrid, sf::Vector2i gridSize, 
                   std::vector<std::string>& fMap, sf::Texture* fTexture) {
 
     for(int i = 0; i < gridSize.x; i++){
@@ -67,10 +62,8 @@ void setEffectMap(/*EffectTile (&effectGrid)[rows][cols]*/
     }
 }
 
-//template <size_t rows, size_t cols>
-void drawGrid(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
-              std::vector<std::vector<BackgroundTile>>& backgroundGrid, /*EntityTile (&entityGrid)[rows][cols]*/ 
-              std::vector<std::vector<EntityTile>>& entityGrid, /*EffectTile (&effectGrid)[rows][cols]*/ 
+void drawGrid(std::vector<std::vector<BackgroundTile>>& backgroundGrid,
+              std::vector<std::vector<EntityTile>>& entityGrid,  
               std::vector<std::vector<EffectTile>>& effectGrid, sf::Vector2i gridSize, sf::RenderWindow& window, 
               sf::Vector2i playerPos, sf::Vector2i lastTile, sf::View& view){
 
@@ -99,9 +92,9 @@ void drawGrid(/*BackgroundTile (&backgroundGrid)[rows][cols]*/
     }
 }
 
-int readMapFromText(/*std::string backgroundMap[]*/
-                    std::vector<std::string>& backgroundMap, /*std::string entityMap[]*/
-                    std::vector<std::string>& entityMap, /*std::string effectMap[]*/
+int readMapFromText(
+                    std::vector<std::string>& backgroundMap,
+                    std::vector<std::string>& entityMap, 
                     std::vector<std::string>& effectMap, std::string path){
 
     std::ifstream inputStream(path);
@@ -132,7 +125,6 @@ int readMapFromText(/*std::string backgroundMap[]*/
     i++;
     while(text[i][0] != '_'){
         entityMap[i - 4 - ySize] = text[i];
-        //std::cout << text[i] << "\n";
         i++;
     }
     i++;
