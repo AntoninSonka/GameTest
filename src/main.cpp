@@ -16,57 +16,20 @@ int main()
 
     sf::RenderWindow window(sf::VideoMode(1024, 1024.f / 1.5f), "Game Test");
 
-    sf::Texture Grass, Barrier, pTexture, eTexture, fTexture, upTexture, downTexture, leftTexture, rightTexture;
+    sf::Texture texture[9];
 
-    Grass.loadFromFile("../textures/Grass.png");
-    Barrier.loadFromFile("../textures/Barrier.png");
-    pTexture.loadFromFile("../textures/Player.png");
-    eTexture.loadFromFile("../textures/Entity.png");
-    fTexture.loadFromFile("../textures/Shadow.png");
-    upTexture.loadFromFile("../textures/PlayerUp.png");
-    downTexture.loadFromFile("../textures/PlayerDown.png");
-    leftTexture.loadFromFile("../textures/PlayerLeft.png");
-    rightTexture.loadFromFile("../textures/PlayerRight.png");
-
-    sf::Vector2i gridSize = sf::Vector2i(50, 50);
+    sf::Vector2i gridSize;
 
     std::vector<std::string> sGrid;
     std::vector<std::string> sEGrid;
     std::vector<std::string> sFGrid;
 
-    for(int i = 0; i < gridSize.y; i++){
-        sGrid.push_back("");
-        sEGrid.push_back("");
-        sFGrid.push_back("");
-    }
-
     std::vector<std::vector<BackgroundTile>> grid;
     std::vector<std::vector<EntityTile>> eGrid;
     std::vector<std::vector<EffectTile>> fGrid;
 
-    for(int i = 0; i < gridSize.x; i++){
-        std::vector<BackgroundTile> underGrid;
-        std::vector<EntityTile> underEGrid;
-        std::vector<EffectTile> underFGrid;
-        for(int j = 0; j < gridSize.y; j++){
-            BackgroundTile bObj;
-            EntityTile eObj;
-            EffectTile fObj;
+    setupMap(2, texture, gridSize, sGrid, sEGrid, sFGrid, grid, eGrid, fGrid);
 
-            underGrid.push_back(bObj);
-            underEGrid.push_back(eObj);
-            underFGrid.push_back(fObj);
-        }
-        grid.push_back(underGrid);
-        eGrid.push_back(underEGrid);
-        fGrid.push_back(underFGrid);
-    }
-
-    readMapFromText(sGrid, sEGrid, sFGrid, "../maps/map1.txt");
-
-    setBackgroundMap(grid, gridSize, sGrid, &Grass, &Barrier);
-    setEntityMap(eGrid, grid, gridSize, sEGrid, &eTexture);
-    setEffectMap(fGrid, gridSize, sFGrid, &fTexture);
 
 
     window.setFramerateLimit(60); 
@@ -83,7 +46,7 @@ int main()
     lastTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
     currentTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
 
-    setPlayerProps(&pTexture, &upTexture, &downTexture, &leftTexture, &rightTexture);
+    setPlayerProps(&texture[2], &texture[5], &texture[6], &texture[7], &texture[8]);
  
 
     while (window.isOpen())

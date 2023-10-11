@@ -137,3 +137,97 @@ int readMapFromText(
     inputStream.close();
     return 0;
 }
+
+void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::vector<std::string>& sGrid, std::vector<std::string>& sEGrid, std::vector<std::string>& sFGrid, std::vector<std::vector<BackgroundTile>>& grid, std::vector<std::vector<EntityTile>>& eGrid, std::vector<std::vector<EffectTile>>& fGrid){
+    switch(levelNum){
+    case 1:{
+        gridSize = sf::Vector2i(50, 50);
+        
+        texture[0].loadFromFile("../textures/Grass.png");
+        texture[1].loadFromFile("../textures/Barrier.png");
+        texture[2].loadFromFile("../textures/Player.png");
+        texture[3].loadFromFile("../textures/Entity.png");
+        texture[4].loadFromFile("../textures/Shadow.png");
+        texture[5].loadFromFile("../textures/PlayerUp.png");
+        texture[6].loadFromFile("../textures/PlayerDown.png");
+        texture[7].loadFromFile("../textures/PlayerLeft.png");
+        texture[8].loadFromFile("../textures/PlayerRight.png");
+
+        for(int i = 0; i < gridSize.y; i++){
+            sGrid.push_back("");
+            sEGrid.push_back("");
+            sFGrid.push_back("");
+        }
+
+        for(int i = 0; i < gridSize.x; i++){
+            std::vector<BackgroundTile> underGrid;
+            std::vector<EntityTile> underEGrid;
+            std::vector<EffectTile> underFGrid;
+            for(int j = 0; j < gridSize.y; j++){
+                BackgroundTile bObj;
+                EntityTile eObj;
+                EffectTile fObj;
+
+                underGrid.push_back(bObj);
+                underEGrid.push_back(eObj);
+                underFGrid.push_back(fObj);
+            }
+            grid.push_back(underGrid);
+            eGrid.push_back(underEGrid);
+            fGrid.push_back(underFGrid);
+        }
+
+        readMapFromText(sGrid, sEGrid, sFGrid, "../maps/map1.txt");
+
+        setBackgroundMap(grid, gridSize, sGrid, &texture[0], &texture[1]);
+        setEntityMap(eGrid, grid, gridSize, sEGrid, &texture[3]);
+        setEffectMap(fGrid, gridSize, sFGrid, &texture[4]);
+        break;
+        }
+    case 2:
+        gridSize = sf::Vector2i(10, 9);
+
+        texture[0].loadFromFile("../textures/Grass.png");
+        texture[1].loadFromFile("../textures/Barrier.png");
+        texture[2].loadFromFile("../textures/Player.png");
+        texture[3].loadFromFile("../textures/Entity.png");
+        texture[4].loadFromFile("../textures/Shadow.png");
+        texture[5].loadFromFile("../textures/PlayerUp.png");
+        texture[6].loadFromFile("../textures/PlayerDown.png");
+        texture[7].loadFromFile("../textures/PlayerLeft.png");
+        texture[8].loadFromFile("../textures/PlayerRight.png");
+
+        for(int i = 0; i < gridSize.y; i++){
+            sGrid.push_back("");
+            sEGrid.push_back("");
+            sFGrid.push_back("");
+        }
+
+        for(int i = 0; i < gridSize.x; i++){
+            std::vector<BackgroundTile> underGrid;
+            std::vector<EntityTile> underEGrid;
+            std::vector<EffectTile> underFGrid;
+            for(int j = 0; j < gridSize.y; j++){
+                BackgroundTile bObj;
+                EntityTile eObj;
+                EffectTile fObj;
+
+                underGrid.push_back(bObj);
+                underEGrid.push_back(eObj);
+                underFGrid.push_back(fObj);
+            }
+            grid.push_back(underGrid);
+            eGrid.push_back(underEGrid);
+            fGrid.push_back(underFGrid);
+        }
+
+        readMapFromText(sGrid, sEGrid, sFGrid, "../maps/map2.txt");
+
+        setBackgroundMap(grid, gridSize, sGrid, &texture[0], &texture[1]);
+        setEntityMap(eGrid, grid, gridSize, sEGrid, &texture[3]);
+        setEffectMap(fGrid, gridSize, sFGrid, &texture[4]);
+        break;
+    default:
+        break;
+    }
+}
