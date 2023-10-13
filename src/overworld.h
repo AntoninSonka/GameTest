@@ -80,7 +80,7 @@ void drawGrid(sf::RenderWindow& window, sf::Vector2i lastTile, sf::View& view){
     player.setPosition(view.getCenter());//tady se kreslí stíny přez hráče, což je currentTile a lastTile
     window.draw(player);
     window.draw(mapData.effectGrid[playerData.playerPos.x][playerData.playerPos.y].rect);
-    if(playerData.lastTile != playerData.playerPos){
+    if(lastTile != playerData.playerPos){
         window.draw(mapData.effectGrid[lastTile.x][lastTile.y].rect);
     }
 }
@@ -128,10 +128,10 @@ int readMapFromText(std::string path){
     return 0;
 }
 
-void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::vector<std::string>& sGrid, std::vector<std::string>& sEGrid, std::vector<std::string>& sFGrid, std::vector<std::vector<BackgroundTile>>& grid, std::vector<std::vector<EntityTile>>& eGrid, std::vector<std::vector<EffectTile>>& fGrid){
+void setupMap(int levelNum, sf::Texture texture[]){
     switch(levelNum){
     case 1:
-        gridSize = sf::Vector2i(50, 50);
+        mapData.gridSize = sf::Vector2i(50, 50);
         
         texture[0].loadFromFile("../textures/Grass.png");
         texture[1].loadFromFile("../textures/Barrier.png");
@@ -143,17 +143,17 @@ void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::
         texture[7].loadFromFile("../textures/PlayerLeft.png");
         texture[8].loadFromFile("../textures/PlayerRight.png");
 
-        for(int i = 0; i < gridSize.y; i++){
-            sGrid.push_back("");
-            sEGrid.push_back("");
-            sFGrid.push_back("");
+        for(int i = 0; i < mapData.gridSize.y; i++){
+            mapData.sBackgroundGrid.push_back("");
+            mapData.sEntityGrid.push_back("");
+            mapData.sEffectGrid.push_back("");
         }
 
-        for(int i = 0; i < gridSize.x; i++){
+        for(int i = 0; i < mapData.gridSize.x; i++){
             std::vector<BackgroundTile> underGrid;
             std::vector<EntityTile> underEGrid;
             std::vector<EffectTile> underFGrid;
-            for(int j = 0; j < gridSize.y; j++){
+            for(int j = 0; j < mapData.gridSize.y; j++){
                 BackgroundTile bObj;
                 EntityTile eObj;
                 EffectTile fObj;
@@ -162,9 +162,9 @@ void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::
                 underEGrid.push_back(eObj);
                 underFGrid.push_back(fObj);
             }
-            grid.push_back(underGrid);
-            eGrid.push_back(underEGrid);
-            fGrid.push_back(underFGrid);
+            mapData.backgroundGrid.push_back(underGrid);
+            mapData.entityGrid.push_back(underEGrid);
+            mapData.effectGrid.push_back(underFGrid);
         }
 
         readMapFromText("../maps/map1.txt");
@@ -174,7 +174,7 @@ void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::
         setEffectMap(&texture[4]);
         break;
     case 2:
-        gridSize = sf::Vector2i(10, 9);
+        mapData.gridSize = sf::Vector2i(10, 9);
 
         texture[0].loadFromFile("../textures/Grass.png");
         texture[1].loadFromFile("../textures/Barrier.png");
@@ -186,17 +186,17 @@ void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::
         texture[7].loadFromFile("../textures/PlayerLeft.png");
         texture[8].loadFromFile("../textures/PlayerRight.png");
 
-        for(int i = 0; i < gridSize.y; i++){
-            sGrid.push_back("");
-            sEGrid.push_back("");
-            sFGrid.push_back("");
+        for(int i = 0; i < mapData.gridSize.y; i++){
+            mapData.sBackgroundGrid.push_back("");
+            mapData.sEntityGrid.push_back("");
+            mapData.sEffectGrid.push_back("");
         }
 
-        for(int i = 0; i < gridSize.x; i++){
+        for(int i = 0; i < mapData.gridSize.x; i++){
             std::vector<BackgroundTile> underGrid;
             std::vector<EntityTile> underEGrid;
             std::vector<EffectTile> underFGrid;
-            for(int j = 0; j < gridSize.y; j++){
+            for(int j = 0; j < mapData.gridSize.y; j++){
                 BackgroundTile bObj;
                 EntityTile eObj;
                 EffectTile fObj;
@@ -205,9 +205,9 @@ void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::
                 underEGrid.push_back(eObj);
                 underFGrid.push_back(fObj);
             }
-            grid.push_back(underGrid);
-            eGrid.push_back(underEGrid);
-            fGrid.push_back(underFGrid);
+            mapData.backgroundGrid.push_back(underGrid);
+            mapData.entityGrid.push_back(underEGrid);
+            mapData.effectGrid.push_back(underFGrid);
         }
 
         readMapFromText("../maps/map2.txt");
@@ -217,7 +217,7 @@ void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::
         setEffectMap(&texture[4]);
         break;
     case 3:
-        gridSize = sf::Vector2i(25, 25);
+        mapData.gridSize = sf::Vector2i(25, 25);
 
         texture[0].loadFromFile("../textures/Grass.png");
         texture[1].loadFromFile("../textures/Barrier.png");
@@ -229,17 +229,17 @@ void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::
         texture[7].loadFromFile("../textures/PlayerLeft.png");
         texture[8].loadFromFile("../textures/PlayerRight.png");
 
-        for(int i = 0; i < gridSize.y; i++){
-            sGrid.push_back("");
-            sEGrid.push_back("");
-            sFGrid.push_back("");
+        for(int i = 0; i < mapData.gridSize.y; i++){
+            mapData.sBackgroundGrid.push_back("");
+            mapData.sEntityGrid.push_back("");
+            mapData.sEffectGrid.push_back("");
         }
 
-        for(int i = 0; i < gridSize.x; i++){
+        for(int i = 0; i < mapData.gridSize.x; i++){
             std::vector<BackgroundTile> underGrid;
             std::vector<EntityTile> underEGrid;
             std::vector<EffectTile> underFGrid;
-            for(int j = 0; j < gridSize.y; j++){
+            for(int j = 0; j < mapData.gridSize.y; j++){
                 BackgroundTile bObj;
                 EntityTile eObj;
                 EffectTile fObj;
@@ -248,12 +248,12 @@ void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::
                 underEGrid.push_back(eObj);
                 underFGrid.push_back(fObj);
             }
-            grid.push_back(underGrid);
-            eGrid.push_back(underEGrid);
-            fGrid.push_back(underFGrid);
+            mapData.backgroundGrid.push_back(underGrid);
+            mapData.entityGrid.push_back(underEGrid);
+            mapData.effectGrid.push_back(underFGrid);
         }
 
-        readMapFromText( "../maps/map3.txt");
+        readMapFromText("../maps/map3.txt");
 
         setBackgroundMap(&texture[0], &texture[1]);
         setEntityMap(&texture[3]);
@@ -264,31 +264,18 @@ void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::
     }
 }
 
-void changeMap(int whichMap,
-               sf::Vector2i positionOfPlayer,
-               std::vector<std::string>& sGrid,
-               std::vector<std::string>& sEGrid, 
-               std::vector<std::string>& sFGrid,
-               std::vector<std::vector<BackgroundTile>>& grid,
-               std::vector<std::vector<EntityTile>>& eGrid,
-               std::vector<std::vector<EffectTile>>& fGrid,
-               sf::View& view,
-               sf::Vector2i& playerPos,
-               sf::Vector2i& lastTile,
-               sf::Vector2i& currentTile,
-               sf::Vector2i& gridSize,
-               sf::Texture texture[]){
+void changeMap(int whichMap, sf::Vector2i positionOfPlayer, sf::View& view, sf::Texture texture[]){
 
-    grid.clear();
-    eGrid.clear();
-    fGrid.clear();
-    sGrid.clear();
-    sEGrid.clear();
-    sFGrid.clear();
-    playerPos = positionOfPlayer;
-    lastTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
-    currentTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
-    view.setCenter(sf::Vector2f(playerPos.x * 16 + 8, playerPos.y * 16 + 8));
-    setupMap(whichMap, texture, gridSize, sGrid, sEGrid, sFGrid, grid, eGrid, fGrid);
+    mapData.backgroundGrid.clear();
+    mapData.entityGrid.clear();
+    mapData.effectGrid.clear();
+    mapData.sBackgroundGrid.clear();
+    mapData.sEntityGrid.clear();
+    mapData.sEffectGrid.clear();
+    playerData.playerPos = positionOfPlayer;
+    playerData.lastTile = sf::Vector2i(14 + playerData.playerPos.x, 10 + playerData.playerPos.y);
+    playerData.currentTile = sf::Vector2i(14 + playerData.playerPos.x, 10 + playerData.playerPos.y);
+    view.setCenter(sf::Vector2f(playerData.playerPos.x * 16 + 8, playerData.playerPos.y * 16 + 8));
+    setupMap(whichMap, texture);
 }
 

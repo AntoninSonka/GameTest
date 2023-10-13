@@ -32,7 +32,7 @@ int main(){
     */
     sf::Texture texture[9];
 
-    setupMap(mapData.currentMap, texture, mapData.gridSize, mapData.sBackgroundGrid, mapData.sEntityGrid, mapData.sEffectGrid, mapData.backgroundGrid, mapData.entityGrid, mapData.effectGrid);
+    setupMap(mapData.currentMap, texture);
 
 
 
@@ -74,15 +74,15 @@ int main(){
             if(mapData.entityGrid[2][2].isInRange(playerData.playerPos)){
                 if(mapData.entityGrid[2][2].isTriggered(playerData.playerPos, realDirection)){
                     if(mapData.currentMap == 1){
-                        changeMap(2, sf::Vector2i(1, 1), mapData.sBackgroundGrid, mapData.sEntityGrid, mapData.sEffectGrid, mapData.backgroundGrid, mapData.entityGrid, mapData.effectGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, texture);
+                        changeMap(2, sf::Vector2i(1, 1), view, texture);
                         mapData.currentMap = 2;
                     }
                     else if(mapData.currentMap == 2){
-                        changeMap(3, sf::Vector2i(1, 1), mapData.sBackgroundGrid, mapData.sEntityGrid, mapData.sEffectGrid, mapData.backgroundGrid, mapData.entityGrid, mapData.effectGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, texture);
+                        changeMap(3, sf::Vector2i(1, 1), view, texture);
                         mapData.currentMap = 3;
                     }
                     else{
-                        changeMap(1, sf::Vector2i(1, 1), mapData.sBackgroundGrid, mapData.sEntityGrid, mapData.sEffectGrid, mapData.backgroundGrid, mapData.entityGrid, mapData.effectGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, texture);
+                        changeMap(1, sf::Vector2i(1, 1), view, texture);
                         mapData.currentMap = 1;
 
                     }
