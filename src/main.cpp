@@ -6,6 +6,7 @@
 #include "overworld.h"
 #include "tile.h"
 #include "player.h"
+#include "data.h"
 
 int main(){
 
@@ -15,7 +16,7 @@ int main(){
 
     sf::RenderWindow window(sf::VideoMode(1024, 1024.f / 1.5f), "Game Test");
 
-    sf::Texture texture[9];
+    /*sf::Texture texture[9];
 
     sf::Vector2i gridSize;
 
@@ -28,26 +29,27 @@ int main(){
     std::vector<std::vector<EffectTile>> fGrid;
 
     int currentMap = 1;
+    */
 
-    setupMap(currentMap, texture, gridSize, sGrid, sEGrid, sFGrid, grid, eGrid, fGrid);
+    setupMap(mapData.currentMap, mapData.texture, mapData.gridSize, mapData.sGrid, mapData.sEGrid, mapData.sFGrid, mapData.grid, mapData.eGrid, mapData.fGrid);
 
 
 
     window.setFramerateLimit(60); 
 
-    sf::Vector2i playerPos = sf::Vector2i(1, 1);
+    //sf::Vector2i playerPos = sf::Vector2i(1, 1);
 
-    sf::View view(sf::Vector2f(playerPos.x * 16 + 8, playerPos.y * 16 + 8), sf::Vector2f(240.f, 240.f / 1.5f));
+    sf::View view(sf::Vector2f(playerData.playerPos.x * 16 + 8, playerData.playerPos.y * 16 + 8), sf::Vector2f(240.f, 240.f / 1.5f));
 
 
-    sf::Vector2i lastTile, currentTile;
+    //sf::Vector2i lastTile, currentTile;
     bool isThere = true;
     bool sprint = false;
 
-    lastTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
-    currentTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
+    //lastTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
+    //currentTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
 
-    setPlayerProps(&texture[2], &texture[5], &texture[6], &texture[7], &texture[8]);
+    setPlayerProps(&mapData.texture[2], &mapData.texture[5], &mapData.texture[6], &mapData.texture[7], &mapData.texture[8]);
  
 
     while (window.isOpen())
@@ -56,7 +58,7 @@ int main(){
 
         //!-------------------------------------------------------
 
-        overworldControlls(grid, eGrid, gridSize, window, isThere, currentTile, lastTile, playerPos, sprint, view);
+        overworldControlls(mapData.grid, mapData.eGrid, mapData.gridSize, window, isThere, playerData.currentTile, playerData.lastTile, playerData.playerPos, sprint, view);
 
         sf::Event event;
 
@@ -68,19 +70,19 @@ int main(){
         }
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
-            if(eGrid[2][2].isInRange(playerPos)){
-                if(eGrid[2][2].isTriggered(playerPos, realDirection)){
-                    if(currentMap == 1){
-                        changeMap(2, sf::Vector2i(3, 3), sGrid, sEGrid, sFGrid, grid, eGrid, fGrid, view, playerPos, lastTile, currentTile, gridSize, texture);
-                        currentMap = 2;
+            if(mapData.eGrid[2][2].isInRange(playerData.playerPos)){
+                if(mapData.eGrid[2][2].isTriggered(playerData.playerPos, realDirection)){
+                    if(mapData.currentMap == 1){
+                        changeMap(2, sf::Vector2i(3, 3), mapData.sGrid, mapData.sEGrid, mapData.sFGrid, mapData.grid, mapData.eGrid, mapData.fGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, mapData.texture);
+                        mapData.currentMap = 2;
                     }
-                    else if(currentMap == 2){
-                        changeMap(3, sf::Vector2i(20, 5), sGrid, sEGrid, sFGrid, grid, eGrid, fGrid, view, playerPos, lastTile, currentTile, gridSize, texture);
-                        currentMap = 3;
+                    else if(mapData.currentMap == 2){
+                        changeMap(3, sf::Vector2i(20, 5), mapData.sGrid, mapData.sEGrid, mapData.sFGrid, mapData.grid, mapData.eGrid, mapData.fGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, mapData.texture);
+                        mapData.currentMap = 3;
                     }
                     else{
-                        changeMap(1, sf::Vector2i(10, 10), sGrid, sEGrid, sFGrid, grid, eGrid, fGrid, view, playerPos, lastTile, currentTile, gridSize, texture);
-                        currentMap = 1;
+                        changeMap(1, sf::Vector2i(10, 10), mapData.sGrid, mapData.sEGrid, mapData.sFGrid, mapData.grid, mapData.eGrid, mapData.fGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, mapData.texture);
+                        mapData.currentMap = 1;
 
                     }
                 }
@@ -89,7 +91,7 @@ int main(){
 
         window.clear();
         window.setView(view);
-        drawGrid(grid, eGrid, fGrid, gridSize, window, playerPos, sf::Vector2i(lastTile.x - 14, lastTile.y - 10), view);
+        drawGrid(mapData.grid, mapData.eGrid, mapData.fGrid, mapData.gridSize, window, playerData.playerPos, sf::Vector2i(playerData.lastTile.x - 14, playerData.lastTile.y - 10), view);
         window.display();
 
         //!-------------------------------------------------------
