@@ -30,8 +30,9 @@ int main(){
 
     int currentMap = 1;
     */
+    sf::Texture texture[9];
 
-    setupMap(mapData.currentMap, mapData.texture, mapData.gridSize, mapData.sGrid, mapData.sEGrid, mapData.sFGrid, mapData.grid, mapData.eGrid, mapData.fGrid);
+    setupMap(mapData.currentMap, texture, mapData.gridSize, mapData.sBackgroundGrid, mapData.sEntityGrid, mapData.sEffectGrid, mapData.backgroundGrid, mapData.entityGrid, mapData.effectGrid);
 
 
 
@@ -49,7 +50,7 @@ int main(){
     //lastTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
     //currentTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
 
-    setPlayerProps(&mapData.texture[2], &mapData.texture[5], &mapData.texture[6], &mapData.texture[7], &mapData.texture[8]);
+    setPlayerProps(&texture[2], &texture[5], &texture[6], &texture[7], &texture[8]);
  
 
     while (window.isOpen())
@@ -58,7 +59,7 @@ int main(){
 
         //!-------------------------------------------------------
 
-        overworldControlls(mapData.grid, mapData.eGrid, mapData.gridSize, window, isThere, playerData.currentTile, playerData.lastTile, playerData.playerPos, sprint, view);
+        overworldControlls(mapData.backgroundGrid, mapData.entityGrid, mapData.gridSize, window, isThere, playerData.currentTile, playerData.lastTile, playerData.playerPos, sprint, view);
 
         sf::Event event;
 
@@ -70,18 +71,18 @@ int main(){
         }
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
-            if(mapData.eGrid[2][2].isInRange(playerData.playerPos)){
-                if(mapData.eGrid[2][2].isTriggered(playerData.playerPos, realDirection)){
+            if(mapData.entityGrid[2][2].isInRange(playerData.playerPos)){
+                if(mapData.entityGrid[2][2].isTriggered(playerData.playerPos, realDirection)){
                     if(mapData.currentMap == 1){
-                        changeMap(2, sf::Vector2i(3, 3), mapData.sGrid, mapData.sEGrid, mapData.sFGrid, mapData.grid, mapData.eGrid, mapData.fGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, mapData.texture);
+                        changeMap(2, sf::Vector2i(1, 1), mapData.sBackgroundGrid, mapData.sEntityGrid, mapData.sEffectGrid, mapData.backgroundGrid, mapData.entityGrid, mapData.effectGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, texture);
                         mapData.currentMap = 2;
                     }
                     else if(mapData.currentMap == 2){
-                        changeMap(3, sf::Vector2i(20, 5), mapData.sGrid, mapData.sEGrid, mapData.sFGrid, mapData.grid, mapData.eGrid, mapData.fGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, mapData.texture);
+                        changeMap(3, sf::Vector2i(1, 1), mapData.sBackgroundGrid, mapData.sEntityGrid, mapData.sEffectGrid, mapData.backgroundGrid, mapData.entityGrid, mapData.effectGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, texture);
                         mapData.currentMap = 3;
                     }
                     else{
-                        changeMap(1, sf::Vector2i(10, 10), mapData.sGrid, mapData.sEGrid, mapData.sFGrid, mapData.grid, mapData.eGrid, mapData.fGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, mapData.texture);
+                        changeMap(1, sf::Vector2i(1, 1), mapData.sBackgroundGrid, mapData.sEntityGrid, mapData.sEffectGrid, mapData.backgroundGrid, mapData.entityGrid, mapData.effectGrid, view, playerData.playerPos, playerData.lastTile, playerData.currentTile, mapData.gridSize, texture);
                         mapData.currentMap = 1;
 
                     }
@@ -91,7 +92,7 @@ int main(){
 
         window.clear();
         window.setView(view);
-        drawGrid(mapData.grid, mapData.eGrid, mapData.fGrid, mapData.gridSize, window, playerData.playerPos, sf::Vector2i(playerData.lastTile.x - 14, playerData.lastTile.y - 10), view);
+        drawGrid(window, sf::Vector2i(playerData.lastTile.x - 14, playerData.lastTile.y - 10), view);
         window.display();
 
         //!-------------------------------------------------------

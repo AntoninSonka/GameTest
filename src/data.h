@@ -7,15 +7,13 @@ struct MapData{
     
     sf::Vector2i gridSize;
 
-    std::vector<std::string> sGrid;
-    std::vector<std::string> sEGrid;
-    std::vector<std::string> sFGrid;
+    std::vector<std::string> sBackgroundGrid;
+    std::vector<std::string> sEntityGrid;
+    std::vector<std::string> sEffectGrid;
 
-    std::vector<std::vector<BackgroundTile>> grid;
-    std::vector<std::vector<EntityTile>> eGrid;
-    std::vector<std::vector<EffectTile>> fGrid;
-
-    sf::Texture texture[9];
+    std::vector<std::vector<BackgroundTile>> backgroundGrid;
+    std::vector<std::vector<EntityTile>> entityGrid;
+    std::vector<std::vector<EffectTile>> effectGrid;
 
     int currentMap = 1;
     
