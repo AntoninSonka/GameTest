@@ -74,9 +74,14 @@ int main(){
                         changeMap(2, sf::Vector2i(3, 3), sGrid, sEGrid, sFGrid, grid, eGrid, fGrid, view, playerPos, lastTile, currentTile, gridSize, texture);
                         currentMap = 2;
                     }
+                    else if(currentMap == 2){
+                        changeMap(3, sf::Vector2i(20, 5), sGrid, sEGrid, sFGrid, grid, eGrid, fGrid, view, playerPos, lastTile, currentTile, gridSize, texture);
+                        currentMap = 3;
+                    }
                     else{
                         changeMap(1, sf::Vector2i(10, 10), sGrid, sEGrid, sFGrid, grid, eGrid, fGrid, view, playerPos, lastTile, currentTile, gridSize, texture);
                         currentMap = 1;
+
                     }
                 }
             }
