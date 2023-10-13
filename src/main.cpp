@@ -59,7 +59,7 @@ int main(){
 
         //!-------------------------------------------------------
 
-        overworldControlls(mapData.backgroundGrid, mapData.entityGrid, mapData.gridSize, window, isThere, playerData.currentTile, playerData.lastTile, playerData.playerPos, sprint, view);
+        overworldControlls(window, isThere, sprint, view);
 
         sf::Event event;
 

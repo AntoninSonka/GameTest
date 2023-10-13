@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "data.h"
 
 sf::RectangleShape player;
 
@@ -22,9 +23,7 @@ void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* dow
     rightTexture = rightTextu;
 }
 
-void overworldControlls(std::vector<std::vector<BackgroundTile>>& backgroundGrid, std::vector<std::vector<EntityTile>>& entityGrid,
-                        sf::Vector2i gridSize, sf::RenderWindow& window,
-                        bool& isThere, sf::Vector2i& currentTile, sf::Vector2i& lastTile, sf::Vector2i& playerPos, bool& sprint, sf::View& view){
+void overworldControlls(sf::RenderWindow& window, bool& isThere, bool& sprint, sf::View& view){
 
     int direction = 0;
 
@@ -32,27 +31,27 @@ void overworldControlls(std::vector<std::vector<BackgroundTile>>& backgroundGrid
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
             direction = 1;
             realDirection = 1;
-            if (!backgroundGrid[currentTile.x - 14][currentTile.y - 11].isWall){
-                currentTile.y--;
-                playerPos.y--;
+            if (!mapData.backgroundGrid[playerData.currentTile.x - 14][playerData.currentTile.y - 11].isWall){
+                playerData.currentTile.y--;
+                playerData.playerPos.y--;
                 isThere = 0;
             }
         }
         else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
             direction = 2;
             realDirection = 2;
-            if(!backgroundGrid[currentTile.x - 14][currentTile.y - 9].isWall){
-                currentTile.y++;
-                playerPos.y++;
+            if(!mapData.backgroundGrid[playerData.currentTile.x - 14][playerData.currentTile.y - 9].isWall){
+                playerData.currentTile.y++;
+                playerData.playerPos.y++;
                 isThere = 0;
             }
         }
         else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
             direction = 3;
             realDirection = 3;
-            if(!backgroundGrid[currentTile.x - 15][currentTile.y - 10].isWall){
-                currentTile.x--;
-                playerPos.x--;
+            if(!mapData.backgroundGrid[playerData.currentTile.x - 15][playerData.currentTile.y - 10].isWall){
+                playerData.currentTile.x--;
+                playerData.playerPos.x--;
                 isThere = 0;
             }
 
@@ -60,9 +59,9 @@ void overworldControlls(std::vector<std::vector<BackgroundTile>>& backgroundGrid
         else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
             direction = 4;
             realDirection = 4;
-            if(!backgroundGrid[currentTile.x - 13][currentTile.y - 10].isWall){
-                currentTile.x++;
-                playerPos.x++;
+            if(!mapData.backgroundGrid[playerData.currentTile.x - 13][playerData.currentTile.y - 10].isWall){
+                playerData.currentTile.x++;
+                playerData.playerPos.x++;
                 isThere = 0;
             }
         }
@@ -94,20 +93,20 @@ void overworldControlls(std::vector<std::vector<BackgroundTile>>& backgroundGrid
     //samotný pohybování se a sprintování, pomocí hýbání view, dokavaď se tam kamera nedostane
     if(!isThere){
         if(sprint){
-        view.move(sf::Vector2f( (currentTile.x < lastTile.x) ? -2 : ((currentTile.x > lastTile.x) ? 2 : 0), 
-                                (currentTile.y < lastTile.y) ? -2 : ((currentTile.y > lastTile.y) ? 2 : 0)));
+        view.move(sf::Vector2f( (playerData.currentTile.x < playerData.lastTile.x) ? -2 : ((playerData.currentTile.x > playerData.lastTile.x) ? 2 : 0), 
+                                (playerData.currentTile.y < playerData.lastTile.y) ? -2 : ((playerData.currentTile.y > playerData.lastTile.y) ? 2 : 0)));
         }
         else{
-        view.move(sf::Vector2f( (currentTile.x < lastTile.x) ? -1 : ((currentTile.x > lastTile.x) ? 1 : 0), 
-                                (currentTile.y < lastTile.y) ? -1 : ((currentTile.y > lastTile.y) ? 1 : 0)));
+        view.move(sf::Vector2f( (playerData.currentTile.x < playerData.lastTile.x) ? -1 : ((playerData.currentTile.x > playerData.lastTile.x) ? 1 : 0), 
+                                (playerData.currentTile.y < playerData.lastTile.y) ? -1 : ((playerData.currentTile.y > playerData.lastTile.y) ? 1 : 0)));
         }
         int xC = view.getCenter().x;
         int yC = view.getCenter().y;
 
         if ((xC % 8 == 0 && xC % 16 != 0) && (yC % 8 == 0 && yC % 16 != 0)){ //pokod se tam dojde, tak se zastaví a lastTile je currentTile
             isThere = 1;
-            lastTile.x = currentTile.x;
-            lastTile.y = currentTile.y;
+            playerData.lastTile.x = playerData.currentTile.x;
+            playerData.lastTile.y = playerData.currentTile.y;
         }
     }
 }
