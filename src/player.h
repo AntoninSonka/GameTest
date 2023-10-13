@@ -26,8 +26,6 @@ void overworldControlls(std::vector<std::vector<BackgroundTile>>& backgroundGrid
                         sf::Vector2i gridSize, sf::RenderWindow& window,
                         bool& isThere, sf::Vector2i& currentTile, sf::Vector2i& lastTile, sf::Vector2i& playerPos, bool& sprint, sf::View& view){
 
-    sf::Event event;
-
     int direction = 0;
 
     if(isThere){
@@ -72,19 +70,6 @@ void overworldControlls(std::vector<std::vector<BackgroundTile>>& backgroundGrid
             direction = 0;
         }
 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
-            if(entityGrid[2][2].isInRange(playerPos)){
-                if(entityGrid[2][2].isTriggered(playerPos, realDirection)){
-                    std::cout << "neco\n";
-                    std::cout << "x: " << currentTile.x - 14 << " y: " << currentTile.y - 10 << "\n";
-                }
-                else{
-                    std::cout << "nic\n";
-                    std::cout << "x: " << currentTile.x - 14 << " y: " << currentTile.y - 10 << "\n";
-                }
-            }
-        }
-
         if(direction == 1 && player.getTexture() != upTexture ){
             player.setTexture(upTexture);
         }
@@ -105,14 +90,6 @@ void overworldControlls(std::vector<std::vector<BackgroundTile>>& backgroundGrid
             sprint = 0;
         }
     }
-
-    while (window.pollEvent(event)) {
-
-        if (event.type == sf::Event::Closed)
-            window.close();
-
-    }
-
 
     //samotný pohybování se a sprintování, pomocí hýbání view, dokavaď se tam kamera nedostane
     if(!isThere){

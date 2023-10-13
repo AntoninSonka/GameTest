@@ -231,3 +231,32 @@ void setupMap(int levelNum, sf::Texture texture[], sf::Vector2i& gridSize, std::
         break;
     }
 }
+
+void changeMap(int whichMap,
+               sf::Vector2i positionOfPlayer,
+               std::vector<std::string>& sGrid,
+               std::vector<std::string>& sEGrid, 
+               std::vector<std::string>& sFGrid,
+               std::vector<std::vector<BackgroundTile>>& grid,
+               std::vector<std::vector<EntityTile>>& eGrid,
+               std::vector<std::vector<EffectTile>>& fGrid,
+               sf::View& view,
+               sf::Vector2i& playerPos,
+               sf::Vector2i& lastTile,
+               sf::Vector2i& currentTile,
+               sf::Vector2i& gridSize,
+               sf::Texture texture[]){
+
+    grid.clear();
+    eGrid.clear();
+    fGrid.clear();
+    sGrid.clear();
+    sEGrid.clear();
+    sFGrid.clear();
+    playerPos = positionOfPlayer;
+    lastTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
+    currentTile = sf::Vector2i(14 + playerPos.x, 10 + playerPos.y);
+    view.setCenter(sf::Vector2f(playerPos.x * 16 + 8, playerPos.y * 16 + 8));
+    setupMap(whichMap, texture, gridSize, sGrid, sEGrid, sFGrid, grid, eGrid, fGrid);
+}
+

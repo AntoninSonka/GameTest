@@ -7,8 +7,7 @@
 #include "tile.h"
 #include "player.h"
 
-int main()
-{
+int main(){
 
     const int IPS = 60; 
 
@@ -28,7 +27,9 @@ int main()
     std::vector<std::vector<EntityTile>> eGrid;
     std::vector<std::vector<EffectTile>> fGrid;
 
-    setupMap(2, texture, gridSize, sGrid, sEGrid, sFGrid, grid, eGrid, fGrid);
+    int currentMap = 1;
+
+    setupMap(currentMap, texture, gridSize, sGrid, sEGrid, sFGrid, grid, eGrid, fGrid);
 
 
 
@@ -56,6 +57,30 @@ int main()
         //!-------------------------------------------------------
 
         overworldControlls(grid, eGrid, gridSize, window, isThere, currentTile, lastTile, playerPos, sprint, view);
+
+        sf::Event event;
+
+        while (window.pollEvent(event)) {
+
+            if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+                window.close();
+
+        }
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)){
+            if(eGrid[2][2].isInRange(playerPos)){
+                if(eGrid[2][2].isTriggered(playerPos, realDirection)){
+                    if(currentMap == 1){
+                        changeMap(2, sf::Vector2i(3, 3), sGrid, sEGrid, sFGrid, grid, eGrid, fGrid, view, playerPos, lastTile, currentTile, gridSize, texture);
+                        currentMap = 2;
+                    }
+                    else{
+                        changeMap(1, sf::Vector2i(10, 10), sGrid, sEGrid, sFGrid, grid, eGrid, fGrid, view, playerPos, lastTile, currentTile, gridSize, texture);
+                        currentMap = 1;
+                    }
+                }
+            }
+        }
 
         window.clear();
         window.setView(view);
