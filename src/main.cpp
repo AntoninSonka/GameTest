@@ -14,12 +14,11 @@ int main(){
 
     std::chrono::milliseconds iDuration(1000 /  IPS);
 
-    sf::RenderWindow window(sf::VideoMode(1024, 1024.f / 1.5f), "Game Test");
+    sf::RenderWindow window(sf::VideoMode(WINDOW_HEIGHT, WINDOW_WIDTH), "Game Test");
 
     sf::Texture texture[9];
 
     setupMap(mapData.currentMap, texture);
-
 
 
     window.setFramerateLimit(60); 
@@ -30,6 +29,7 @@ int main(){
 
     bool isThere = true;
     bool sprint = false;
+
 
     setPlayerProps(&texture[2], &texture[5], &texture[6], &texture[7], &texture[8]);
  

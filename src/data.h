@@ -3,6 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include "tile.h"
 
+#define WINDOW_HEIGHT 1024.f
+#define WINDOW_WIDTH 1024.f / 1.5f
+
 struct MapData{
     
     sf::Vector2i gridSize;
