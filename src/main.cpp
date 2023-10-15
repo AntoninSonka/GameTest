@@ -16,7 +16,7 @@ int main(){
 
     sf::RenderWindow window(sf::VideoMode(WINDOW_HEIGHT, WINDOW_WIDTH), "Game Test");
 
-    sf::Texture texture[9];
+    sf::Texture texture[13];
 
     setupMap(mapData.currentMap, texture);
 
@@ -31,7 +31,7 @@ int main(){
     bool sprint = false;
 
 
-    setPlayerProps(&texture[2], &texture[5], &texture[6], &texture[7], &texture[8], &texture[2]);
+    setPlayerProps(&texture[2], &texture[5], &texture[6], &texture[7], &texture[8], &texture[9], &texture[10], &texture[11], &texture[12]);
  
 
     while (window.isOpen())

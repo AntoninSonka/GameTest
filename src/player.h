@@ -9,14 +9,17 @@ sf::Texture* upTexture;
 sf::Texture* downTexture;
 sf::Texture* leftTexture;
 sf::Texture* rightTexture;
-sf::Texture* playerTexture;
+sf::Texture* upWTexture;
+sf::Texture* downWTexture;
+sf::Texture* leftWTexture;
+sf::Texture* rightWTexture;
 
 int sprintCount = 0;
 int normalCount = 0;
 
 int realDirection = 0;
 
-void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* downTextu, sf::Texture* leftTextu, sf::Texture* rightTextu, sf::Texture* playerTextu){
+void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* downTextu, sf::Texture* leftTextu, sf::Texture* rightTextu, sf::Texture* upWTextu, sf::Texture* downWTextu, sf::Texture* leftWTextu, sf::Texture* rightWTextu){
     player.setSize(sf::Vector2f(16, 16));
     player.setOrigin(player.getGlobalBounds().width / 2, player.getGlobalBounds().height / 2);
     player.setTexture(texture); //TODO dodělat víc textur a animace
@@ -25,7 +28,11 @@ void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* dow
     downTexture = downTextu;
     leftTexture = leftTextu;
     rightTexture = rightTextu;
-    playerTexture = playerTextu;
+    upWTexture = upWTextu;
+    downWTexture = downWTextu;
+    leftWTexture = leftWTextu;
+    rightWTexture = rightWTextu;
+
 }
 
 void overworldControlls(sf::RenderWindow& window, bool& isThere, bool& sprint, sf::View& view){
@@ -74,7 +81,7 @@ void overworldControlls(sf::RenderWindow& window, bool& isThere, bool& sprint, s
             direction = 0;
         }
         
-        if(player.getTexture() != playerTexture){
+        if(player.getTexture() != upWTexture || player.getTexture() != downWTexture || player.getTexture() != leftWTexture || player.getTexture() != rightWTexture){
             if(direction == 1 && player.getTexture() != upTexture ){
                 player.setTexture(upTexture);
             }
@@ -110,7 +117,18 @@ void overworldControlls(sf::RenderWindow& window, bool& isThere, bool& sprint, s
             normalCount++;
         }
         if((normalCount >= 4 && normalCount <= 12) || (sprintCount >= 2 && sprintCount <= 6)){
-            player.setTexture(playerTexture);
+            if(realDirection == 1 && player.getTexture() != upWTexture ){
+                player.setTexture(upWTexture);
+            }
+            else if(realDirection == 2 && player.getTexture() != downWTexture ){
+                player.setTexture(downWTexture);
+            }
+            else if(realDirection == 3 && player.getTexture() != leftWTexture ){
+                player.setTexture(leftWTexture);
+            }
+            else if(realDirection == 4 && player.getTexture() != rightWTexture ){
+                player.setTexture(rightWTexture);
+            }
         }
         else{
             if(realDirection == 1 && player.getTexture() != upTexture ){

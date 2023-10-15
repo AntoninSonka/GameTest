@@ -129,19 +129,22 @@ int readMapFromText(std::string path){
 }
 
 void setupMap(int levelNum, sf::Texture texture[]){
+    texture[0].loadFromFile("../textures/Grass.png");
+    texture[1].loadFromFile("../textures/Barrier.png");
+    texture[2].loadFromFile("../textures/Player.png");
+    texture[3].loadFromFile("../textures/Entity.png");
+    texture[4].loadFromFile("../textures/Shadow.png");
+    texture[5].loadFromFile("../textures/PlayerUp.png");
+    texture[6].loadFromFile("../textures/PlayerDown.png");
+    texture[7].loadFromFile("../textures/PlayerLeft.png");
+    texture[8].loadFromFile("../textures/PlayerRight.png");
+    texture[9].loadFromFile("../textures/PlayerUpW.png");
+    texture[10].loadFromFile("../textures/PlayerDownW.png");
+    texture[11].loadFromFile("../textures/PlayerLeftW.png");
+    texture[12].loadFromFile("../textures/PlayerRightW.png");
     switch(levelNum){
     case 1:
         mapData.gridSize = sf::Vector2i(50, 50);
-        
-        texture[0].loadFromFile("../textures/Grass.png");
-        texture[1].loadFromFile("../textures/Barrier.png");
-        texture[2].loadFromFile("../textures/Player.png");
-        texture[3].loadFromFile("../textures/Entity.png");
-        texture[4].loadFromFile("../textures/Shadow.png");
-        texture[5].loadFromFile("../textures/PlayerUp.png");
-        texture[6].loadFromFile("../textures/PlayerDown.png");
-        texture[7].loadFromFile("../textures/PlayerLeft.png");
-        texture[8].loadFromFile("../textures/PlayerRight.png");
 
         for(int i = 0; i < mapData.gridSize.y; i++){
             mapData.sBackgroundGrid.push_back("");
@@ -176,16 +179,6 @@ void setupMap(int levelNum, sf::Texture texture[]){
     case 2:
         mapData.gridSize = sf::Vector2i(10, 9);
 
-        texture[0].loadFromFile("../textures/Grass.png");
-        texture[1].loadFromFile("../textures/Barrier.png");
-        texture[2].loadFromFile("../textures/Player.png");
-        texture[3].loadFromFile("../textures/Entity.png");
-        texture[4].loadFromFile("../textures/Shadow.png");
-        texture[5].loadFromFile("../textures/PlayerUp.png");
-        texture[6].loadFromFile("../textures/PlayerDown.png");
-        texture[7].loadFromFile("../textures/PlayerLeft.png");
-        texture[8].loadFromFile("../textures/PlayerRight.png");
-
         for(int i = 0; i < mapData.gridSize.y; i++){
             mapData.sBackgroundGrid.push_back("");
             mapData.sEntityGrid.push_back("");
@@ -218,16 +211,6 @@ void setupMap(int levelNum, sf::Texture texture[]){
         break;
     case 3:
         mapData.gridSize = sf::Vector2i(25, 25);
-
-        texture[0].loadFromFile("../textures/Grass.png");
-        texture[1].loadFromFile("../textures/Barrier.png");
-        texture[2].loadFromFile("../textures/Player.png");
-        texture[3].loadFromFile("../textures/Entity.png");
-        texture[4].loadFromFile("../textures/Shadow.png");
-        texture[5].loadFromFile("../textures/PlayerUp.png");
-        texture[6].loadFromFile("../textures/PlayerDown.png");
-        texture[7].loadFromFile("../textures/PlayerLeft.png");
-        texture[8].loadFromFile("../textures/PlayerRight.png");
 
         for(int i = 0; i < mapData.gridSize.y; i++){
             mapData.sBackgroundGrid.push_back("");
