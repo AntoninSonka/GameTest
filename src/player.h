@@ -9,10 +9,14 @@ sf::Texture* upTexture;
 sf::Texture* downTexture;
 sf::Texture* leftTexture;
 sf::Texture* rightTexture;
+sf::Texture* playerTexture;
+
+int sprintCount = 0;
+int normalCount = 0;
 
 int realDirection = 0;
 
-void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* downTextu, sf::Texture* leftTextu, sf::Texture* rightTextu){
+void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* downTextu, sf::Texture* leftTextu, sf::Texture* rightTextu, sf::Texture* playerTextu){
     player.setSize(sf::Vector2f(16, 16));
     player.setOrigin(player.getGlobalBounds().width / 2, player.getGlobalBounds().height / 2);
     player.setTexture(texture); //TODO dodělat víc textur a animace
@@ -21,6 +25,7 @@ void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* dow
     downTexture = downTextu;
     leftTexture = leftTextu;
     rightTexture = rightTextu;
+    playerTexture = playerTextu;
 }
 
 void overworldControlls(sf::RenderWindow& window, bool& isThere, bool& sprint, sf::View& view){
@@ -68,18 +73,20 @@ void overworldControlls(sf::RenderWindow& window, bool& isThere, bool& sprint, s
         else {
             direction = 0;
         }
-
-        if(direction == 1 && player.getTexture() != upTexture ){
-            player.setTexture(upTexture);
-        }
-        else if(direction == 2 && player.getTexture() != downTexture ){
-            player.setTexture(downTexture);
-        }
-        else if(direction == 3 && player.getTexture() != leftTexture ){
-            player.setTexture(leftTexture);
-        }
-        else if(direction == 4 && player.getTexture() != rightTexture ){
-            player.setTexture(rightTexture);
+        
+        if(player.getTexture() != playerTexture){
+            if(direction == 1 && player.getTexture() != upTexture ){
+                player.setTexture(upTexture);
+            }
+            else if(direction == 2 && player.getTexture() != downTexture ){
+                player.setTexture(downTexture);
+            }
+            else if(direction == 3 && player.getTexture() != leftTexture ){
+                player.setTexture(leftTexture);
+            }
+            else if(direction == 4 && player.getTexture() != rightTexture ){
+                player.setTexture(rightTexture);
+            }
         }
 
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)){
@@ -95,10 +102,29 @@ void overworldControlls(sf::RenderWindow& window, bool& isThere, bool& sprint, s
         if(sprint){
         view.move(sf::Vector2f( (playerData.currentTile.x < playerData.lastTile.x) ? -2 : ((playerData.currentTile.x > playerData.lastTile.x) ? 2 : 0), 
                                 (playerData.currentTile.y < playerData.lastTile.y) ? -2 : ((playerData.currentTile.y > playerData.lastTile.y) ? 2 : 0)));
+            sprintCount++;
         }
         else{
         view.move(sf::Vector2f( (playerData.currentTile.x < playerData.lastTile.x) ? -1 : ((playerData.currentTile.x > playerData.lastTile.x) ? 1 : 0), 
                                 (playerData.currentTile.y < playerData.lastTile.y) ? -1 : ((playerData.currentTile.y > playerData.lastTile.y) ? 1 : 0)));
+            normalCount++;
+        }
+        if((normalCount >= 4 && normalCount <= 12) || (sprintCount >= 2 && sprintCount <= 6)){
+            player.setTexture(playerTexture);
+        }
+        else{
+            if(realDirection == 1 && player.getTexture() != upTexture ){
+                player.setTexture(upTexture);
+            }
+            else if(realDirection == 2 && player.getTexture() != downTexture ){
+                player.setTexture(downTexture);
+            }
+            else if(realDirection == 3 && player.getTexture() != leftTexture ){
+                player.setTexture(leftTexture);
+            }
+            else if(realDirection == 4 && player.getTexture() != rightTexture ){
+                player.setTexture(rightTexture);
+            }
         }
         int xC = view.getCenter().x;
         int yC = view.getCenter().y;
@@ -107,6 +133,8 @@ void overworldControlls(sf::RenderWindow& window, bool& isThere, bool& sprint, s
             isThere = 1;
             playerData.lastTile.x = playerData.currentTile.x;
             playerData.lastTile.y = playerData.currentTile.y;
+            sprintCount = 0;
+            normalCount = 0;
         }
     }
 }

@@ -31,7 +31,7 @@ int main(){
     bool sprint = false;
 
 
-    setPlayerProps(&texture[2], &texture[5], &texture[6], &texture[7], &texture[8]);
+    setPlayerProps(&texture[2], &texture[5], &texture[6], &texture[7], &texture[8], &texture[2]);
  
 
     while (window.isOpen())
