@@ -14,7 +14,7 @@ sf::Texture* downWTexture;
 sf::Texture* leftWTexture;
 sf::Texture* rightWTexture;
 
-int sprintCount = 0;
+int sprintCount = 0;//TODO udelat at nepouzivam globalni promneny a misto toho staticky promneny
 int normalCount = 0;
 
 int realDirection = 0;
