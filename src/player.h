@@ -14,8 +14,7 @@ sf::Texture* downWTexture;
 sf::Texture* leftWTexture;
 sf::Texture* rightWTexture;
 
-int sprintCount = 0;//TODO udelat at nepouzivam globalni promneny a misto toho staticky promneny
-int normalCount = 0;
+
 
 int realDirection = 0;
 
@@ -38,7 +37,10 @@ void setPlayerProps(sf::Texture* texture, sf::Texture* upTextu, sf::Texture* dow
 void overworldControlls(sf::RenderWindow& window, bool& isThere, bool& sprint, sf::View& view){
 
     int direction = 0;
-
+    
+    static int sprintCount = 0;
+    static int normalCount = 0;
+    
     if(isThere){
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
             direction = 1;
