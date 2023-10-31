@@ -92,8 +92,7 @@ int readMapFromText(std::string path){
     if(!inputStream){
         std::cerr << "unable to open " << path << "\n";
         inputStream.close();
-        return 1;
-    }
+        return 1; }
 
     std::vector<std::string> text;
 
