@@ -24,7 +24,7 @@ public:
     bool isPlayerOn = false; //!dosud nepoužitý, má význam později kvůli dveřím atd, možná předělám do entit
     bool isWall = false; 
 
-};
+}; 
 
 //!------------------------------------------
 //? Entity classa
