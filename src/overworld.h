@@ -106,7 +106,7 @@ int readMapFromText(std::string path){
     int xSize = std::stoi(text[0]);
     int ySize = std::stoi(text[1]);
     
-    mapData.sBackgroundGrid[ySize];
+    mapData.sBackgroundGrid.resize(ySize);
     int i = 3;
     while(text[i][0] != '_'){
         mapData.sBackgroundGrid[i - 3] = text[i];
