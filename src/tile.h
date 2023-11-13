@@ -36,9 +36,8 @@ public:
     bool exists = false; //je to kvůli generaci, aby se negenerovali zbytečný nepoužitý "sf::RectangleShape"
     bool moves = false;
 
-    std::vector<sf::Vector2i> path;
+    std::vector<sf::Vector2i> path; //TODO musim dodelat pohyb entit
     sf::Vector2i field[2];
-    
 
     void setWallUnder(BackgroundTile& backgroundTile);
     void unsetWallUnder(BackgroundTile& backgroundTile); //!    unsetne průchodnost i když byla nastavena na BackgrountTile 
