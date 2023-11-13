@@ -1,4 +1,6 @@
+#include <SFML/System/Vector2.hpp>
 #include <chrono>
+#include <sys/types.h>
 #include <thread>
 #include <iostream>
 #include <SFML/Graphics.hpp>
