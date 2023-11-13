@@ -34,6 +34,11 @@ class EntityTile : public Tile {
 public:
 
     bool exists = false; //je to kvůli generaci, aby se negenerovali zbytečný nepoužitý "sf::RectangleShape"
+    bool moves = false;
+
+    std::vector<sf::Vector2i> path;
+    sf::Vector2i field[2];
+    
 
     void setWallUnder(BackgroundTile& backgroundTile);
     void unsetWallUnder(BackgroundTile& backgroundTile); //!    unsetne průchodnost i když byla nastavena na BackgrountTile 
@@ -41,6 +46,8 @@ public:
     bool isTriggered(sf::Vector2i playerPos, int direction);
 
     bool isInRange(sf::Vector2i playerPos);
+
+    void makeMoveOnField(); //TODO musim dodela movement
 
 };
 
